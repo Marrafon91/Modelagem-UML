@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Artista {
@@ -7,6 +9,7 @@ public class Artista {
 	private Integer id;
 	private String nome;
 	private String nacionalidade;
+	private List<Album> albuns = new ArrayList<Album>();
 
 	public Artista() {
 	}
@@ -39,6 +42,14 @@ public class Artista {
 
 	public void setNacionalidade(String nacionalidade) {
 		this.nacionalidade = nacionalidade;
+	}	
+
+	public void adicionarAlbum(Album album) {
+		albuns.add(album);
+	}
+	
+	public List<Album> getAlbuns() {
+		return albuns;
 	}
 
 	@Override
@@ -61,13 +72,11 @@ public class Artista {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Artista [id=");
-		builder.append(id);
-		builder.append(", nome=");
 		builder.append(nome);
-		builder.append(", nacionalidade=");
+		builder.append("(");
 		builder.append(nacionalidade);
-		builder.append("]");
+		builder.append(")");
+		builder.append(",");
 		return builder.toString();
 	}
 }
