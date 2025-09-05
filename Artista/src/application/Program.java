@@ -6,6 +6,7 @@ import entities.Album;
 import entities.Artista;
 import entities.Musica;
 
+
 public class Program {
 
     public static void main(String[] args) {
