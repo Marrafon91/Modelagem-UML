@@ -72,7 +72,7 @@ public class Time {
 
 	@Override
 	public String toString() {
-		return "Time [id=" + id + ", name=" + name + ", capitao="
-				+ (capitaoDoTime != null ? capitaoDoTime.getNome() : "N/A") + "]";
+	    return name + " (Capitão: " + (capitaoDoTime != null ? capitaoDoTime.getNome() : "N/A") + ")";
 	}
+
 }

@@ -63,13 +63,7 @@ public class Estadio {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Estadio [id=");
-		builder.append(id);
-		builder.append(", nome=");
-		builder.append(nome);
-		builder.append("]");
-		return builder.toString();
+		return nome + (endereco != null ? " - " + endereco : "");
 	}
 
 }

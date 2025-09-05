@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
 import entities.Campeonato;
+import entities.Endereco;
+import entities.Estadio;
 import entities.Jogador;
 import entities.Partida;
 import entities.Time;
@@ -40,15 +42,27 @@ public class Program {
 		corinthians.setCapitaoDoTime(j1);
 		flamengo.setCapitaoDoTime(j3);
 
-		// Adicionando times diretamente na lista do campeonato
+		// Adicionando times ao campeonato
 		c1.getTimes().add(corinthians);
 		c1.getTimes().add(flamengo);
 
-		// Partidas
-		Partida p1 = new Partida(1, sdf.parse("20/08/2017"), corinthians, flamengo, 10, 7);
-		Partida p2 = new Partida(2, sdf.parse("21/08/2017"), flamengo, corinthians, 9, 13);
+		// Estádios e Endereços
+		Endereco end1 = new Endereco(1, "Rua da Madeira", 2789, "Estadio", "Nova Europa");
+		Endereco end2 = new Endereco(2, "Rua Machado", 1910, "Estadio", "Vila Negra");
 
-		// Adicionando partidas diretamente no set do campeonato
+		Estadio e1 = new Estadio(1, "Centro Esportivo FLA");
+		e1.setEndereco(end1);
+
+		Estadio e2 = new Estadio(2, "Arena Gaviões");
+		e2.setEndereco(end2);
+
+		// Partidas com Estádio
+		Partida p1 = new Partida(1, sdf.parse("20/08/2017"), corinthians, flamengo, 10, 7);
+		p1.setEstadio(e1);
+
+		Partida p2 = new Partida(2, sdf.parse("21/08/2017"), flamengo, corinthians, 9, 13);
+		p2.setEstadio(e2);
+
 		c1.getPartidas().add(p1);
 		c1.getPartidas().add(p2);
 
@@ -61,15 +75,18 @@ public class Program {
 			System.out.println(t);
 			System.out.println("Jogadores:");
 			for (Jogador j : t.getJogadores()) {
-				System.out.println(" - " + j + ", Idade: " + j.getIdade());
+				System.out.println(" - " + j);
 			}
 		}
 
 		System.out.println("\n=== Partidas ===");
 		for (Partida p : c1.getPartidas()) {
 			System.out.println(p);
+			System.out.println("Estádio: " + p.getEstadio().getNome());
+			System.out.println("Endereço: " + p.getEstadio().getEndereco());
 			String vencedor = (p.vencedor() != null) ? p.vencedor().getName() : "Empate";
 			System.out.println("Vencedor: " + vencedor);
+			System.out.println("-----------------------------");
 		}
 	}
 }

@@ -94,17 +94,24 @@ public class Endereco {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Endereco [id=");
-		builder.append(id);
-		builder.append(", logradouro=");
-		builder.append(logradouro);
-		builder.append(", numero=");
-		builder.append(numero);
-		builder.append(", complemento=");
-		builder.append(complemento);
-		builder.append(", bairro=");
-		builder.append(bairro);
-		builder.append("]");
-		return builder.toString();
+
+		if (logradouro != null && !logradouro.isEmpty()) {
+			builder.append(logradouro);
+		}
+
+		if (numero != null) {
+			builder.append(", ").append(numero);
+		}
+
+		if (complemento != null && !complemento.isEmpty()) {
+			builder.append(" - ").append(complemento);
+		}
+
+		if (bairro != null && !bairro.isEmpty()) {
+			builder.append(", ").append(bairro);
+		}
+
+		return builder.toString().trim();
 	}
+
 }

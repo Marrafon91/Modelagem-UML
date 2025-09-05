@@ -17,6 +17,8 @@ public class Partida implements Serializable {
 	private Time mandante;
 	private Time visitante;
 
+	private Estadio estadio;
+
 //	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 	public Partida() {
@@ -90,6 +92,14 @@ public class Partida implements Serializable {
 		}
 	}
 
+	public Estadio getEstadio() {
+		return estadio;
+	}
+
+	public void setEstadio(Estadio estadio) {
+		this.estadio = estadio;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -110,9 +120,9 @@ public class Partida implements Serializable {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		String dataFormatada = (data != null) ? sdf.format(data) : "N/A";
 
-		return "Partida [id=" + id + ", data=" + dataFormatada + ", pontuacaoMandante=" + pontuacaoMandante
+		return "Partida data: " + dataFormatada + ", pontuacaoMandante=" + pontuacaoMandante
 				+ ", pontuacaoVisitante=" + pontuacaoVisitante + ", mandante=" + mandante.getName() + ", visitante="
-				+ visitante.getName() + "]";
+				+ visitante.getName();
 	}
 
 }

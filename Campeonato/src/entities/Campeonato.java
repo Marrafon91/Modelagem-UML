@@ -85,14 +85,7 @@ public class Campeonato {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Campeonato [id=");
-		builder.append(id);
-		builder.append(", ano=");
-		builder.append(ano);
-		builder.append(", nome=");
-		builder.append(nome);
-		builder.append("]");
-		return builder.toString();
+		return nome + " (" + ano + ")";
 	}
+
 }

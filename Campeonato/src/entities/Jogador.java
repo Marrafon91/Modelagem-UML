@@ -106,9 +106,10 @@ public class Jogador {
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		String dataFormatada = (nascimento != null) ? sdf.format(nascimento) : "N/A";
+		String alturaFormatada = (altura != null) ? String.format("%.2f", altura) : "N/A";
 
-		return "Jogador [id=" + id + ", nome=" + nome + ", nascimento=" + dataFormatada + ", idade=" + getIdade()
-				+ ", genero=" + genero + ", altura=" + altura + "]";
+		return nome + " (Nascimento: " + dataFormatada + ", Idade: " + getIdade() + ", Gênero: "
+				+ (genero != null ? genero : "N/A") + ", Altura: " + alturaFormatada + "m)";
 	}
 
 }
