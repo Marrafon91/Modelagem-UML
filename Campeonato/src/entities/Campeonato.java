@@ -1,12 +1,17 @@
 package entities;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Campeonato {
 
 	private Integer id;
 	private Integer ano;
 	private String nome;
+
+	Set<Time> times = new HashSet<>();
+	Set<Partida> partidas = new HashSet<>();
 
 	public Campeonato() {
 	}
@@ -44,6 +49,24 @@ public class Campeonato {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	public Set<Time> getTimes() {
+		return Set.copyOf(times);
+	}
+
+	public Set<Partida> getPartidas() {
+		return Set.copyOf(partidas);
+	}
+
+	public void adicionarTimes(Time time) {
+		if (!times.contains(time)) {
+			times.add(time);
+		}
+	}
+
+	public void adicionarPartida(Partida partida) {
+		partidas.add(partida);
 	}
 
 	@Override

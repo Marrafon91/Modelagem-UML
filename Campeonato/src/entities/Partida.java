@@ -1,21 +1,27 @@
 package entities;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Partida {
 
 	private Integer id;
-	private Date data;
+	private LocalDateTime data;
 	private Integer pontuacaoMandante;
 	private Integer pontuacaoVisitante;
+
+	private Time mandante;
+	private Time visitante;
 
 	public Partida() {
 	}
 
-	public Partida(Integer id, Date data, Integer pontuacaoMandante, Integer pontuacaoVisitante) {
+	public Partida(Integer id, LocalDateTime data, Time mandante, Time visitante, Integer pontuacaoMandante,
+			Integer pontuacaoVisitante) {
 		this.id = id;
 		this.data = data;
+		this.mandante = mandante;
+		this.visitante = visitante;
 		this.pontuacaoMandante = pontuacaoMandante;
 		this.pontuacaoVisitante = pontuacaoVisitante;
 	}
@@ -28,11 +34,11 @@ public class Partida {
 		this.id = id;
 	}
 
-	public Date getData() {
+	public LocalDateTime getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
 
@@ -52,6 +58,32 @@ public class Partida {
 		this.pontuacaoVisitante = pontuacaoVisitante;
 	}
 
+	public Time getMandante() {
+		return mandante;
+	}
+
+	public void setMandante(Time mandante) {
+		this.mandante = mandante;
+	}
+
+	public Time getVisitante() {
+		return visitante;
+	}
+
+	public void setVisitante(Time visitante) {
+		this.visitante = visitante;
+	}
+
+	public String vencedor() {
+		if (pontuacaoMandante > pontuacaoVisitante) {
+			return mandante.getName();
+		} else if (pontuacaoVisitante > pontuacaoMandante) {
+			return visitante.getName();
+		} else {
+			return "Empate";
+		}
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -61,9 +93,7 @@ public class Partida {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (obj == null || getClass() != obj.getClass())
 			return false;
 		Partida other = (Partida) obj;
 		return Objects.equals(id, other.id);
@@ -71,16 +101,7 @@ public class Partida {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Partida [id=");
-		builder.append(id);
-		builder.append(", data=");
-		builder.append(data);
-		builder.append(", pontuacaoMandante=");
-		builder.append(pontuacaoMandante);
-		builder.append(", pontuacaoVisitante=");
-		builder.append(pontuacaoVisitante);
-		builder.append("]");
-		return builder.toString();
+		return "Partida [id=" + id + ", data=" + data + ", mandante=" + mandante.getName() + ", visitante="
+				+ visitante.getName() + ", placar=" + pontuacaoMandante + "x" + pontuacaoVisitante + "]";
 	}
 }
