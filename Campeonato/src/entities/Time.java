@@ -45,7 +45,7 @@ public class Time {
 		this.capitaoDoTime = capitaoDoTime;
 	}
 
-	public Set<Jogador> getJogadore() {
+	public Set<Jogador> getJogadores() {
 		return jogadores;
 	}
 

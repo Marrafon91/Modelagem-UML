@@ -10,6 +10,8 @@ public class Endereco {
 	private String complemento;
 	private String bairro;
 
+	private Estadio estadio;
+
 	public Endereco() {
 	}
 
@@ -34,6 +36,9 @@ public class Endereco {
 	}
 
 	public void setLogradouro(String logradouro) {
+		if (logradouro == null || logradouro.isBlank()) {
+			throw new IllegalArgumentException("O logradouro não pode ser vazio.");
+		}
 		this.logradouro = logradouro;
 	}
 
@@ -59,6 +64,14 @@ public class Endereco {
 
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
+	}
+
+	public Estadio getEstadio() {
+		return estadio;
+	}
+
+	public void setEstadio(Estadio estadio) {
+		this.estadio = estadio;
 	}
 
 	@Override

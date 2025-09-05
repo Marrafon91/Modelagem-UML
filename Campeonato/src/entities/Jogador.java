@@ -1,7 +1,8 @@
 package entities;
 
-import java.time.LocalDate;
-import java.time.Period;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 import entities.enums.Genero;
@@ -10,14 +11,14 @@ public class Jogador {
 
 	private Integer id;
 	private String nome;
-	private LocalDate nascimento;
+	private Date nascimento;
 	private Genero genero;
 	private Double altura;
 
 	public Jogador() {
 	}
 
-	public Jogador(Integer id, String nome, LocalDate nascimento, Genero genero, Double altura) {
+	public Jogador(Integer id, String nome, Date nascimento, Genero genero, Double altura) {
 		this.id = id;
 		this.nome = nome;
 		this.nascimento = nascimento;
@@ -41,11 +42,11 @@ public class Jogador {
 		this.nome = nome;
 	}
 
-	public LocalDate getNascimento() {
+	public Date getNascimento() {
 		return nascimento;
 	}
 
-	public void setNascimento(LocalDate nascimento) {
+	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
 	}
 
@@ -66,8 +67,24 @@ public class Jogador {
 	}
 
 	public int getIdade() {
-		if (nascimento == null)	return 0;
-		return Period.between(nascimento, LocalDate.now()).getYears();
+		if (nascimento == null) {
+			return 0;
+		}
+
+		Calendar nascimentoCal = Calendar.getInstance();
+		nascimentoCal.setTime(nascimento);
+
+		Calendar hoje = Calendar.getInstance();
+
+		int idade = hoje.get(Calendar.YEAR) - nascimentoCal.get(Calendar.YEAR);
+
+		if (hoje.get(Calendar.MONTH) < nascimentoCal.get(Calendar.MONTH)
+				|| (hoje.get(Calendar.MONTH) == nascimentoCal.get(Calendar.MONTH)
+						&& hoje.get(Calendar.DAY_OF_MONTH) < nascimentoCal.get(Calendar.DAY_OF_MONTH))) {
+			idade--;
+		}
+
+		return idade;
 	}
 
 	@Override
@@ -87,7 +104,11 @@ public class Jogador {
 
 	@Override
 	public String toString() {
-		return "Jogador [id=" + id + ", nome=" + nome + ", nascimento=" + nascimento + ", idade=" + getIdade()
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String dataFormatada = (nascimento != null) ? sdf.format(nascimento) : "N/A";
+
+		return "Jogador [id=" + id + ", nome=" + nome + ", nascimento=" + dataFormatada + ", idade=" + getIdade()
 				+ ", genero=" + genero + ", altura=" + altura + "]";
 	}
+
 }

@@ -6,7 +6,9 @@ public class Estadio {
 
 	private Integer id;
 	private String nome;
-	
+
+	private Endereco endereco;
+
 	public Estadio() {
 	}
 
@@ -28,7 +30,18 @@ public class Estadio {
 	}
 
 	public void setNome(String nome) {
+		if (nome == null || nome.isBlank()) {
+			throw new IllegalArgumentException("O nome do estádio não pode ser vazio.");
+		}
 		this.nome = nome;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	@Override
@@ -57,6 +70,6 @@ public class Estadio {
 		builder.append(nome);
 		builder.append("]");
 		return builder.toString();
-	}	
-	
+	}
+
 }

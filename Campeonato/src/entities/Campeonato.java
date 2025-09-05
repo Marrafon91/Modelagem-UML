@@ -1,6 +1,8 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,8 +12,8 @@ public class Campeonato {
 	private Integer ano;
 	private String nome;
 
-	Set<Time> times = new HashSet<>();
-	Set<Partida> partidas = new HashSet<>();
+	private List<Time> times = new ArrayList<>();
+	private Set<Partida> partidas = new HashSet<>();
 
 	public Campeonato() {
 	}
@@ -51,12 +53,12 @@ public class Campeonato {
 		return Objects.hash(id);
 	}
 
-	public Set<Time> getTimes() {
-		return Set.copyOf(times);
+	public List<Time> getTimes() {
+		return times;
 	}
 
 	public Set<Partida> getPartidas() {
-		return Set.copyOf(partidas);
+		return partidas;
 	}
 
 	public void adicionarTimes(Time time) {

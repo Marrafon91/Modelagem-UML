@@ -1,22 +1,28 @@
 package entities;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
-public class Partida {
+public class Partida implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private LocalDateTime data;
+	private Date data;
 	private Integer pontuacaoMandante;
 	private Integer pontuacaoVisitante;
 
 	private Time mandante;
 	private Time visitante;
 
+//	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 	public Partida() {
 	}
 
-	public Partida(Integer id, LocalDateTime data, Time mandante, Time visitante, Integer pontuacaoMandante,
+	public Partida(Integer id, Date data, Time mandante, Time visitante, Integer pontuacaoMandante,
 			Integer pontuacaoVisitante) {
 		this.id = id;
 		this.data = data;
@@ -34,11 +40,11 @@ public class Partida {
 		this.id = id;
 	}
 
-	public LocalDateTime getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(LocalDateTime data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
@@ -74,13 +80,13 @@ public class Partida {
 		this.visitante = visitante;
 	}
 
-	public String vencedor() {
+	public Time vencedor() {
 		if (pontuacaoMandante > pontuacaoVisitante) {
-			return mandante.getName();
+			return mandante;
 		} else if (pontuacaoVisitante > pontuacaoMandante) {
-			return visitante.getName();
+			return visitante;
 		} else {
-			return "Empate";
+			return null;
 		}
 	}
 
@@ -93,7 +99,7 @@ public class Partida {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null || getClass() != obj.getClass())
+		if (!(obj instanceof Partida))
 			return false;
 		Partida other = (Partida) obj;
 		return Objects.equals(id, other.id);
@@ -101,7 +107,12 @@ public class Partida {
 
 	@Override
 	public String toString() {
-		return "Partida [id=" + id + ", data=" + data + ", mandante=" + mandante.getName() + ", visitante="
-				+ visitante.getName() + ", placar=" + pontuacaoMandante + "x" + pontuacaoVisitante + "]";
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String dataFormatada = (data != null) ? sdf.format(data) : "N/A";
+
+		return "Partida [id=" + id + ", data=" + dataFormatada + ", pontuacaoMandante=" + pontuacaoMandante
+				+ ", pontuacaoVisitante=" + pontuacaoVisitante + ", mandante=" + mandante.getName() + ", visitante="
+				+ visitante.getName() + "]";
 	}
+
 }
