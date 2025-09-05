@@ -1,20 +1,23 @@
 package entities;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
+
+import entities.enums.Genero;
 
 public class Jogador {
 
 	private Integer id;
 	private String nome;
-	private Date nascimento;
-	private Character genero;
+	private LocalDate nascimento;
+	private Genero genero;
 	private Double altura;
-	
+
 	public Jogador() {
 	}
 
-	public Jogador(Integer id, String nome, Date nascimento, Character genero, Double altura) {
+	public Jogador(Integer id, String nome, LocalDate nascimento, Genero genero, Double altura) {
 		this.id = id;
 		this.nome = nome;
 		this.nascimento = nascimento;
@@ -38,19 +41,19 @@ public class Jogador {
 		this.nome = nome;
 	}
 
-	public Date getNascimento() {
+	public LocalDate getNascimento() {
 		return nascimento;
 	}
 
-	public void setNascimento(Date nascimento) {
+	public void setNascimento(LocalDate nascimento) {
 		this.nascimento = nascimento;
 	}
 
-	public Character getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
 
-	public void setGenero(Character genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
 
@@ -62,6 +65,11 @@ public class Jogador {
 		this.altura = altura;
 	}
 
+	public int getIdade() {
+		if (nascimento == null)	return 0;
+		return Period.between(nascimento, LocalDate.now()).getYears();
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -71,9 +79,7 @@ public class Jogador {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (obj == null || getClass() != obj.getClass())
 			return false;
 		Jogador other = (Jogador) obj;
 		return Objects.equals(id, other.id);
@@ -81,19 +87,7 @@ public class Jogador {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Jogador [id=");
-		builder.append(id);
-		builder.append(", nome=");
-		builder.append(nome);
-		builder.append(", nascimento=");
-		builder.append(nascimento);
-		builder.append(", genero=");
-		builder.append(genero);
-		builder.append(", altura=");
-		builder.append(altura);
-		builder.append("]");
-		return builder.toString();
-	}	
-	
+		return "Jogador [id=" + id + ", nome=" + nome + ", nascimento=" + nascimento + ", idade=" + getIdade()
+				+ ", genero=" + genero + ", altura=" + altura + "]";
+	}
 }
