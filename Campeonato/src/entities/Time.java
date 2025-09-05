@@ -1,12 +1,17 @@
 package entities;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Time {
 
 	private Integer id;
 	private String name;
-	
+
+	private Jogador capitaoDoTime;
+	private Set<Jogador> jogadores = new HashSet<>();
+
 	public Time() {
 	}
 
@@ -32,6 +37,22 @@ public class Time {
 		this.name = name;
 	}
 
+	public Jogador getCapitaoDoTime() {
+		return capitaoDoTime;
+	}
+
+	public void setCapitaoDoTime(Jogador capitaoDoTime) {
+		this.capitaoDoTime = capitaoDoTime;
+	}
+
+	public Set<Jogador> getJogadore() {
+		return jogadores;
+	}
+
+	public void adicionarJogador(Jogador jogador) {
+		jogadores.add(jogador);
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -51,12 +72,7 @@ public class Time {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Time [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append("]");
-		return builder.toString();
-	}		
+		return "Time [id=" + id + ", name=" + name + ", capitao="
+				+ (capitaoDoTime != null ? capitaoDoTime.getNome() : "N/A") + "]";
+	}
 }
