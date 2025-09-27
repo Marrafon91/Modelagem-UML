@@ -11,6 +11,7 @@ public class Album {
 	private Integer ano;
 	private List<Musica> musicas = new ArrayList<>();
 
+
 	public Album() {
 	}
 
