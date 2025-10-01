@@ -19,9 +19,7 @@ import java.util.UUID;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = "categorias")
 @Table(name = "tb_produto")
-public class Produto implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+public class Produto  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "tb_id", unique = true, nullable = false)

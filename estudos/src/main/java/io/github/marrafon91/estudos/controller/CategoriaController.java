@@ -37,7 +37,9 @@ public class CategoriaController {
     @GetMapping("{id}")
     public ResponseEntity<Categoria> obterPorId(@PathVariable("id") String id) {
         var categoriaId = UUID.fromString(id);
+
         Categoria categoria = categoriaService.obterPorId(categoriaId);
+
         return ResponseEntity.ok(categoria);
     }
 

@@ -1,25 +1,29 @@
 package io.github.marrafon91.estudos;
 
 import io.github.marrafon91.estudos.entities.Categoria;
+import io.github.marrafon91.estudos.entities.Cidade;
+import io.github.marrafon91.estudos.entities.Estado;
 import io.github.marrafon91.estudos.entities.Produto;
 import io.github.marrafon91.estudos.repositories.CategoriaRepositorio;
+import io.github.marrafon91.estudos.repositories.CidadeRepositorio;
+import io.github.marrafon91.estudos.repositories.EstadoRepositorio;
 import io.github.marrafon91.estudos.repositories.ProdutoRepositorio;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
+@RequiredArgsConstructor
 public class SpringBootEstudosApplication implements CommandLineRunner {
 
-	@Autowired
-	private CategoriaRepositorio categoriaRepositorio;
-	@Autowired
-	private ProdutoRepositorio produtoRepositorio;
+	private final CategoriaRepositorio categoriaRepositorio;
+	private final ProdutoRepositorio produtoRepositorio;
+	private final EstadoRepositorio estadoRepositorio;
+	private final CidadeRepositorio cidadeRepositorio;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootEstudosApplication.class, args);
@@ -57,5 +61,35 @@ public class SpringBootEstudosApplication implements CommandLineRunner {
 
 		categoriaRepositorio.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepositorio.saveAll(Arrays.asList(p1, p2, p3));
+
+		Estado est1 = new Estado();
+		est1.setId(null);
+		est1.setNome("Minas Gerais");
+
+		Estado est2 = new Estado();
+		est2.setId(null);
+		est2.setNome("São Paulo");
+
+		Cidade c1 = new Cidade();
+		c1.setId(null);
+		c1.setNome("Uberlandia");
+		c1.setEstado(est1);
+
+		Cidade c2 = new Cidade();
+		c2.setId(null);
+		c2.setNome("São Paulo");
+		c2.setEstado(est2);
+
+		Cidade c3 = new Cidade();
+		c3.setId(null);
+		c3.setNome("Campinas");
+		c3.setEstado(est2);
+
+		est1.getCidades().add(c1);
+		est2.getCidades().addAll(Arrays.asList(c2, c3));
+
+		estadoRepositorio.saveAll(Arrays.asList(est1, est2));
+		cidadeRepositorio.saveAll(Arrays.asList(c1, c2, c3));
+
 	}
 }
