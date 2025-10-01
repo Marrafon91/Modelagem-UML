@@ -4,11 +4,13 @@ import io.github.marrafon91.estudos.entities.Categoria;
 import io.github.marrafon91.estudos.repository.CategoriaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -19,14 +21,14 @@ public class CategoriaController {
     private CategoriaRepositorio categoriaRepositorio;
 
     @PostMapping
-    public ResponseEntity<Categoria> criar(@RequestBody Categoria categoria) {
+    public ResponseEntity<Void> criar(@RequestBody Categoria categoria) {
         Categoria salvar = categoriaRepositorio.save(categoria);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(salvar.getId())
                 .toUri();
-        return ResponseEntity.created(location).body(salvar);
+        return ResponseEntity.created(location).build();
 
     }
 
@@ -42,6 +44,20 @@ public class CategoriaController {
     public ResponseEntity<List<Categoria>> listar() {
         List<Categoria> lista = categoriaRepositorio.findAll();
         return ResponseEntity.ok(lista);
+    }
+
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Categoria> deletar(@PathVariable("id") String id) {
+        var catId = UUID.fromString(id);
+
+        if (!categoriaRepositorio.existsById(catId)) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        categoriaRepositorio.deleteById(catId);
+        return ResponseEntity.noContent().build();
+
     }
 
 }
