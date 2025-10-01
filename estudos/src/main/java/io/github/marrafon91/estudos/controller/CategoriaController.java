@@ -40,7 +40,7 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> listar() {
+    public ResponseEntity<List<Categoria>> bascarTodos() {
         List<Categoria> lista = categoriaRepositorio.findAll();
         return ResponseEntity.ok(lista);
     }
@@ -65,18 +65,16 @@ public class CategoriaController {
             @RequestBody Categoria categoria) {
 
         var catId = UUID.fromString(id);
-        Optional<Categoria> attCategoria = categoriaRepositorio.findById(catId);
+        Optional<Categoria> attId = categoriaRepositorio.findById(catId);
 
-        if (attCategoria.isEmpty()) {
+        if (attId.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        var categoriaExistente = attCategoria.get();
-        categoriaExistente.setNome(categoria.getNome());
+        var idExistente = attId.get();
+        idExistente.setNome(categoria.getNome());
 
-        categoriaRepositorio.save(categoriaExistente);
-        return ResponseEntity.ok().body(categoriaExistente);
-
+        categoriaRepositorio.save(idExistente);
+        return ResponseEntity.ok().body(idExistente);
     }
-
 }
