@@ -1,5 +1,6 @@
 package io.github.marrafon91.estudos.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,11 +34,12 @@ public class Produto implements Serializable {
     @Column(name = "tb_preco", precision = 18, scale = 2)
     private BigDecimal preco;
 
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(
             name = "PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    @JsonBackReference
     private List<Categoria> categorias = new ArrayList<>();
 }

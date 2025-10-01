@@ -2,6 +2,8 @@ package io.github.marrafon91.estudos.controller;
 
 import io.github.marrafon91.estudos.entities.Categoria;
 import io.github.marrafon91.estudos.repositories.CategoriaRepositorio;
+import io.github.marrafon91.estudos.services.CategoriaService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +16,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "categorias")
+@RequiredArgsConstructor
 public class CategoriaController {
 
-    @Autowired
-    private CategoriaRepositorio categoriaRepositorio;
+    private final CategoriaRepositorio categoriaRepositorio;
+    private final CategoriaService categoriaService;
 
     @PostMapping
     public ResponseEntity<Void> criar(@RequestBody Categoria categoria) {
@@ -34,9 +37,8 @@ public class CategoriaController {
     @GetMapping("{id}")
     public ResponseEntity<Categoria> obterPorId(@PathVariable("id") String id) {
         var categoriaId = UUID.fromString(id);
-        return categoriaRepositorio.findById(categoriaId)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Categoria categoria = categoriaService.obterPorId(categoriaId);
+        return ResponseEntity.ok(categoria);
     }
 
     @GetMapping
