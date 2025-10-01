@@ -4,7 +4,6 @@ import io.github.marrafon91.estudos.entities.Categoria;
 import io.github.marrafon91.estudos.repository.CategoriaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -48,15 +47,35 @@ public class CategoriaController {
 
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Categoria> deletar(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") String id) {
         var catId = UUID.fromString(id);
 
         if (!categoriaRepositorio.existsById(catId)) {
             return ResponseEntity.notFound().build();
         }
-        
+
         categoriaRepositorio.deleteById(catId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Categoria> atualizar(
+            @PathVariable("id")
+            String id,
+            @RequestBody Categoria categoria) {
+
+        var catId = UUID.fromString(id);
+        Optional<Categoria> attCategoria = categoriaRepositorio.findById(catId);
+
+        if (attCategoria.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        var categoriaExistente = attCategoria.get();
+        categoriaExistente.setNome(categoria.getNome());
+
+        categoriaRepositorio.save(categoriaExistente);
+        return ResponseEntity.ok().body(categoriaExistente);
 
     }
 
