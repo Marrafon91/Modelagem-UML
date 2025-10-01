@@ -1,4 +1,4 @@
-package io.github.marrafon91.estudos.repository;
+package io.github.marrafon91.estudos.repositories;
 
 import io.github.marrafon91.estudos.entities.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;

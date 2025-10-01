@@ -1,7 +1,7 @@
 package io.github.marrafon91.estudos.controller;
 
 import io.github.marrafon91.estudos.entities.Categoria;
-import io.github.marrafon91.estudos.repository.CategoriaRepositorio;
+import io.github.marrafon91.estudos.repositories.CategoriaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +32,7 @@ public class CategoriaController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Categoria> buscarPorId(@PathVariable("id") String id) {
+    public ResponseEntity<Categoria> obterPorId(@PathVariable("id") String id) {
         var categoriaId = UUID.fromString(id);
         return categoriaRepositorio.findById(categoriaId)
                 .map(ResponseEntity::ok)
