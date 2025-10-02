@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +37,6 @@ public class Produto  {
             name = "PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-    @JsonBackReference
+    @JsonIgnore
     private List<Categoria> categorias = new ArrayList<>();
 }

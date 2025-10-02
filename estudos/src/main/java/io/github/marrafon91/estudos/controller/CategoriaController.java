@@ -4,7 +4,6 @@ import io.github.marrafon91.estudos.entities.Categoria;
 import io.github.marrafon91.estudos.repositories.CategoriaRepositorio;
 import io.github.marrafon91.estudos.services.CategoriaService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,7 +22,7 @@ public class CategoriaController {
     private final CategoriaService categoriaService;
 
     @PostMapping
-    public ResponseEntity<Void> criar(@RequestBody Categoria categoria) {
+    public ResponseEntity<Void> criarCategoria(@RequestBody Categoria categoria) {
         Categoria salvar = categoriaRepositorio.save(categoria);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -44,7 +43,7 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> bascarTodos() {
+    public ResponseEntity<List<Categoria>> buscarTodos() {
         List<Categoria> lista = categoriaRepositorio.findAll();
         return ResponseEntity.ok(lista);
     }

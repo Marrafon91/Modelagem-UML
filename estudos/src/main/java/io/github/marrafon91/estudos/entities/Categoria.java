@@ -1,13 +1,12 @@
 package io.github.marrafon91.estudos.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -30,7 +29,7 @@ public class Categoria {
 
 
     @ManyToMany(mappedBy = "categorias")
-    @JsonManagedReference
     private List<Produto> produtos = new ArrayList<>();
+
 
 }
