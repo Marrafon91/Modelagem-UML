@@ -3,6 +3,7 @@ package io.github.marrafon91.estudos.entities;
 import io.github.marrafon91.estudos.entities.enums.TipoCliente;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.util.*;
@@ -10,12 +11,12 @@ import java.util.*;
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-@Table(name = "tb_cliente")
+@Table(name = "cliente")
 public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tb_id", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private UUID id;
     private String nome;
@@ -23,19 +24,24 @@ public class Cliente {
     private String cpfOuCnpj;
     private Integer tipo;
 
+    @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
+    @ElementCollection
+    @CollectionTable(name = "telefone")
     private Set<String> telefones = new HashSet<>();
 
     public Cliente() {
     }
 
-    public Cliente(UUID id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+    public Cliente(UUID id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, Set<String> telefones, List<Endereco> enderecos) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo.getCod();
+        this.telefones = telefones;
+        this.enderecos = enderecos;
     }
 
     public UUID getId() {
@@ -68,6 +74,14 @@ public class Cliente {
 
     public void setCpfOuCnpj(String cpfOuCnpj) {
         this.cpfOuCnpj = cpfOuCnpj;
+    }
+
+    public Set<String> getTelefones() {
+        return telefones;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
     public TipoCliente getTipo() {

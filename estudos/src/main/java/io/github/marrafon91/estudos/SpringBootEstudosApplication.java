@@ -1,13 +1,8 @@
 package io.github.marrafon91.estudos;
 
-import io.github.marrafon91.estudos.entities.Categoria;
-import io.github.marrafon91.estudos.entities.Cidade;
-import io.github.marrafon91.estudos.entities.Estado;
-import io.github.marrafon91.estudos.entities.Produto;
-import io.github.marrafon91.estudos.repositories.CategoriaRepositorio;
-import io.github.marrafon91.estudos.repositories.CidadeRepositorio;
-import io.github.marrafon91.estudos.repositories.EstadoRepositorio;
-import io.github.marrafon91.estudos.repositories.ProdutoRepositorio;
+import io.github.marrafon91.estudos.entities.*;
+import io.github.marrafon91.estudos.entities.enums.TipoCliente;
+import io.github.marrafon91.estudos.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +19,8 @@ public class SpringBootEstudosApplication implements CommandLineRunner {
 	private final ProdutoRepositorio produtoRepositorio;
 	private final EstadoRepositorio estadoRepositorio;
 	private final CidadeRepositorio cidadeRepositorio;
+	private final ClienteRepositorio clienteRepositorio;
+	private final EnderecoRepositorio enderecoRepositorio;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootEstudosApplication.class, args);
@@ -91,5 +88,37 @@ public class SpringBootEstudosApplication implements CommandLineRunner {
 		estadoRepositorio.saveAll(Arrays.asList(est1, est2));
 		cidadeRepositorio.saveAll(Arrays.asList(c1, c2, c3));
 
+		Cliente cli1 = new Cliente();
+		cli1.setId(null);
+		cli1.setNome("Maria Silva");
+		cli1.setEmail("maria@gmail.com");
+		cli1.setCpfOuCnpj("36378912377");
+		cli1.setTipo(TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+
+		Endereco e1 = new Endereco();
+		e1.setId(null);
+		e1.setLogradouro("Rua flores");
+		e1.setNumero("300");
+		e1.setComplemento("Apto 303");
+		e1.setBairro("Jardim");
+		e1.setCep("38220834");
+		e1.setCliente(cli1);
+		e1.setCidade(c1);
+
+		Endereco e2 = new Endereco();
+		e2.setId(null);
+		e2.setLogradouro("Avenida Matos");
+		e2.setNumero("105");
+		e2.setComplemento("Sala 800");
+		e2.setBairro("Centro");
+		e2.setCep("38777012");
+		e2.setCliente(cli1);
+		e2.setCidade(c2);
+
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+
+		clienteRepositorio.save(cli1);
+		enderecoRepositorio.saveAll(Arrays.asList(e1, e2));
 	}
 }

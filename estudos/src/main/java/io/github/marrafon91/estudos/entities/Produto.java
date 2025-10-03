@@ -17,18 +17,18 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = "categorias")
-@Table(name = "tb_produto")
+@Table(name = "produto")
 public class Produto  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tb_id", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private UUID id;
 
-    @Column(name = "tb_nome", nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "tb_preco", precision = 18, scale = 2)
+    @Column(name = "preco", precision = 18, scale = 2)
     private BigDecimal preco;
 
 

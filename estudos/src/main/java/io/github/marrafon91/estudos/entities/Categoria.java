@@ -14,15 +14,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = "produtos")
-@Table(name = "tb_categoria")
+@Table(name = "categoria")
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tb_id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     @EqualsAndHashCode.Include
     private UUID id;
 
-    @Column(name = "tb_nome", nullable = false, length = 80)
+    @Column(name = "nome", nullable = false, length = 80)
     private String nome;
 
 

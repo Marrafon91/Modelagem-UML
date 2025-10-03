@@ -12,12 +12,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-@Table(name = "tb_endereco")
+@Table(name = "endereco")
 public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tb_id", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     @EqualsAndHashCode.Include
     private UUID id;
     private String logradouro;
@@ -26,7 +26,11 @@ public class Endereco {
     private String bairro;
     private String cep;
 
-    private Cidade cidade;
-
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "cidade_id")
+    private Cidade cidade;
 }
