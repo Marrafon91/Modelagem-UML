@@ -5,7 +5,7 @@ public enum EstadoPagamento {
     QUITADO(2, "quitado"),
     CANCELADO(3, "cancelado");
 
-    private int cod;
+    private Integer cod;
     private String descricao;
 
     EstadoPagamento(int cod, String descricao) {

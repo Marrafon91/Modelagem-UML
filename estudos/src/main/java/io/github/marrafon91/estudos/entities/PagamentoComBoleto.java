@@ -1,11 +1,13 @@
 package io.github.marrafon91.estudos.entities;
 
 import io.github.marrafon91.estudos.entities.enums.EstadoPagamento;
+import jakarta.persistence.Entity;
 import lombok.*;
 
 import java.util.Date;
 import java.util.UUID;
 
+@Entity
 @Getter
 @Setter
 @ToString
