@@ -127,8 +127,6 @@ public class SpringBootEstudosApplication implements CommandLineRunner {
 		clienteRepositorio.save(cli1);
 		enderecoRepositorio.saveAll(Arrays.asList(e1, e2));
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
 		Pedido ped1 = new Pedido();
 		ped1.setCliente(cli1);
 		ped1.setEnderecoDeEntrega(e1);
@@ -149,7 +147,7 @@ public class SpringBootEstudosApplication implements CommandLineRunner {
 		PagamentoComBoleto pagto2 = new PagamentoComBoleto();
 		pagto2.setEstado(EstadoPagamento.PEDENTE);
 		pagto2.setPedido(ped2);
-		pagto2.setDataVencimento(sdf.parse("20/10/2017"));
+		pagto2.setDataVencimento(Instant.now());
 		pagto2.setDataPagamento(null);
 
 		ped2.setPagamento(pagto2);

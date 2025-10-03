@@ -1,5 +1,6 @@
 package io.github.marrafon91.estudos.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.github.marrafon91.estudos.entities.enums.EstadoPagamento;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,6 +20,7 @@ public abstract class Pagamento {
 
     private Integer estado;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId

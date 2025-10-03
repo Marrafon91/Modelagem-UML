@@ -13,7 +13,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = "categorias")
+@ToString(exclude = {"categorias", "itens"})
 @Table(name = "produto")
 public class Produto  {
     @Id
@@ -28,18 +28,20 @@ public class Produto  {
     @Column(name = "preco", precision = 18, scale = 2)
     private BigDecimal preco;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-    @JsonIgnore
     private List<Categoria> categorias = new ArrayList<>();
 
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> itens = new HashSet<>();
 
+    @JsonIgnore
     public List<Pedido> getPedidos() {
         List<Pedido> lista = new ArrayList<>();
         for (ItemPedido x : itens) {

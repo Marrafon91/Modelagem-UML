@@ -1,10 +1,13 @@
 package io.github.marrafon91.estudos.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.github.marrafon91.estudos.entities.enums.EstadoPagamento;
 import jakarta.persistence.Entity;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -13,13 +16,15 @@ import java.util.UUID;
 @ToString
 public class PagamentoComBoleto extends Pagamento{
 
-    private Date dataVencimento;
-    private Date dataPagamento;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Instant dataVencimento;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Instant dataPagamento;
 
     public PagamentoComBoleto() {
     }
 
-    public PagamentoComBoleto(UUID id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
+    public PagamentoComBoleto(UUID id, EstadoPagamento estado, Pedido pedido, Instant dataVencimento, Instant dataPagamento) {
         super(id, estado, pedido);
         this.dataPagamento = dataPagamento;
         this.dataVencimento = dataVencimento;

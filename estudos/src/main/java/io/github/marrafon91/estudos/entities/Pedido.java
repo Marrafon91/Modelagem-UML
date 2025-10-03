@@ -1,5 +1,8 @@
 package io.github.marrafon91.estudos.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +19,7 @@ import java.util.UUID;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 @Table(name = "pedido")
+
 public class Pedido {
 
     @Id
@@ -24,12 +28,16 @@ public class Pedido {
     @EqualsAndHashCode.Include
     private UUID id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
     @Column(nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Instant instante;
 
+
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -39,5 +47,6 @@ public class Pedido {
     private Endereco enderecoDeEntrega;
 
     @OneToMany(mappedBy = "id.pedido")
+    @JsonIgnore
     private Set<ItemPedido> itens = new HashSet<>();
 }
