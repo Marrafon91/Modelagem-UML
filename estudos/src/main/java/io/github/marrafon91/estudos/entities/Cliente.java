@@ -1,9 +1,10 @@
 package io.github.marrafon91.estudos.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.github.marrafon91.estudos.entities.enums.TipoCliente;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
 import java.util.*;
@@ -11,7 +12,7 @@ import java.util.*;
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-@Table(name = "cliente")
+@Table(name = "clientes")
 public class Cliente {
 
     @Id
@@ -24,7 +25,8 @@ public class Cliente {
     private String cpfOuCnpj;
     private Integer tipo;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
@@ -78,6 +80,10 @@ public class Cliente {
 
     public Set<String> getTelefones() {
         return telefones;
+    }
+
+    public void setTelefones(Set<String> telefones) {
+        this.telefones = telefones;
     }
 
     public List<Endereco> getEnderecos() {

@@ -1,5 +1,6 @@
 package io.github.marrafon91.estudos.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Endereco {
     private String cep;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
