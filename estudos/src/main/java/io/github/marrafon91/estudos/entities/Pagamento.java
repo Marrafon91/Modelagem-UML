@@ -1,9 +1,10 @@
 package io.github.marrafon91.estudos.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.marrafon91.estudos.entities.enums.EstadoPagamento;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.UUID;
 @Entity
@@ -20,7 +21,7 @@ public abstract class Pagamento {
 
     private Integer estado;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId

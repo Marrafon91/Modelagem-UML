@@ -1,6 +1,6 @@
 package io.github.marrafon91.estudos.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.marrafon91.estudos.entities.enums.TipoCliente;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -25,13 +25,13 @@ public class Cliente {
     private Integer tipo;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
     @CollectionTable(name = "telefone")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 

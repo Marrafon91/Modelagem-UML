@@ -1,6 +1,5 @@
 package io.github.marrafon91.estudos.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,7 +23,6 @@ public class Cidade {
     @Column(name = "nome", nullable = false, length = 120)
     private String nome;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private Estado estado;

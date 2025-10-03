@@ -16,10 +16,12 @@ import java.util.UUID;
 @ToString
 public class PagamentoComBoleto extends Pagamento{
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
     private Instant dataVencimento;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
     private Instant dataPagamento;
+
 
     public PagamentoComBoleto() {
     }

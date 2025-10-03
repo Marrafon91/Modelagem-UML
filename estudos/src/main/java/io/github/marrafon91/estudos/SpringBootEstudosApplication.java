@@ -145,7 +145,7 @@ public class SpringBootEstudosApplication implements CommandLineRunner {
 		ped2.setInstante(Instant.now());
 
 		PagamentoComBoleto pagto2 = new PagamentoComBoleto();
-		pagto2.setEstado(EstadoPagamento.PEDENTE);
+		pagto2.setEstado(EstadoPagamento.PENDENTE);
 		pagto2.setPedido(ped2);
 		pagto2.setDataVencimento(Instant.now());
 		pagto2.setDataPagamento(null);

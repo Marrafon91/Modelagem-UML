@@ -1,8 +1,6 @@
 package io.github.marrafon91.estudos.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,12 +30,9 @@ public class Pedido {
     @Column(nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Instant instante;
 
-
-    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -47,6 +42,5 @@ public class Pedido {
     private Endereco enderecoDeEntrega;
 
     @OneToMany(mappedBy = "id.pedido")
-    @JsonIgnore
     private Set<ItemPedido> itens = new HashSet<>();
 }

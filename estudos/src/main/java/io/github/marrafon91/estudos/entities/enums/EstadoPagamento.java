@@ -1,7 +1,7 @@
 package io.github.marrafon91.estudos.entities.enums;
 
 public enum EstadoPagamento {
-    PEDENTE(1, "pedente"),
+    PENDENTE(1, "pendente"),
     QUITADO(2, "quitado"),
     CANCELADO(3, "cancelado");
 
