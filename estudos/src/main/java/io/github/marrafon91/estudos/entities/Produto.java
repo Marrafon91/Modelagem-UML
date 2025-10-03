@@ -1,14 +1,11 @@
 package io.github.marrafon91.estudos.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Getter
@@ -31,7 +28,6 @@ public class Produto  {
     @Column(name = "preco", precision = 18, scale = 2)
     private BigDecimal preco;
 
-
     @ManyToMany
     @JoinTable(
             name = "PRODUTO_CATEGORIA",
@@ -39,4 +35,15 @@ public class Produto  {
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     @JsonIgnore
     private List<Categoria> categorias = new ArrayList<>();
+
+
+    private Set<ItemPedido> itens = new HashSet<>();
+
+    public List<Pedido> getPedidos() {
+        List<Pedido> lista = new ArrayList<>();
+        for (ItemPedido x : itens) {
+            lista.add(x.getPedido());
+        }
+        return lista;
+    }
 }

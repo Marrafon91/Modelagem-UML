@@ -75,11 +75,9 @@ public class ClienteController {
                     clienteEncontrado.setCpfOuCnpj(cliente.getCpfOuCnpj());
                     clienteEncontrado.setTipo(cliente.getTipo());
 
-                    // Telefones - limpa e adiciona novos
                     clienteEncontrado.getTelefones().clear();
                     clienteEncontrado.getTelefones().addAll(cliente.getTelefones());
 
-                    // Endereços - limpa e adiciona novos
                     clienteEncontrado.getEnderecos().clear();
                     clienteEncontrado.getEnderecos().addAll(cliente.getEnderecos());
 
