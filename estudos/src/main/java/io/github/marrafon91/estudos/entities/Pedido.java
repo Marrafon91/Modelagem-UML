@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.Date;
 import java.util.UUID;
 
-
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,6 +23,7 @@ public class Pedido {
     private UUID id;
     private Date instante;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
     private Cliente cliente;

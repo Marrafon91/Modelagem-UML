@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
-
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,12 +16,14 @@ import java.util.UUID;
 public class Pagamento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
     @EqualsAndHashCode.Include
     private UUID id;
 
     private EstadoPagamento estado;
 
+    @OneToOne
+    @JoinColumn(name = "pedido_id")
+    @MapsId
     private Pedido pedido;
 }
