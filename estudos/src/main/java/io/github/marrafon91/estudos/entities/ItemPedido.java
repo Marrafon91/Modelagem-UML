@@ -2,7 +2,6 @@ package io.github.marrafon91.estudos.entities;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
 import java.io.Serializable;
