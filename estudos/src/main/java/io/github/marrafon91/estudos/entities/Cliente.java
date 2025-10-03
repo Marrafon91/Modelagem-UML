@@ -1,6 +1,5 @@
 package io.github.marrafon91.estudos.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.github.marrafon91.estudos.entities.enums.TipoCliente;
 import jakarta.persistence.*;
@@ -33,17 +32,19 @@ public class Cliente {
     @CollectionTable(name = "telefone")
     private Set<String> telefones = new HashSet<>();
 
+    private List<Pedido> pedidos = new ArrayList<>();
+
+
+
     public Cliente() {
     }
 
-    public Cliente(UUID id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, Set<String> telefones, List<Endereco> enderecos) {
+    public Cliente(UUID id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo.getCod();
-        this.telefones = telefones;
-        this.enderecos = enderecos;
     }
 
     public UUID getId() {
@@ -96,5 +97,13 @@ public class Cliente {
 
     public void setTipo(TipoCliente tipo) {
         this.tipo = tipo.getCod();
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 }
