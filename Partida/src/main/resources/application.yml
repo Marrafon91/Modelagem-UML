@@ -2,7 +2,7 @@ spring:
   application:
   name: Partida-Spring
   datasource:
-    url: jdbc:h2:mem:categoria
+    url: jdbc:h2:mem:partida
     username: sa
     password:
     driver-class-name: org.h2.Driver
