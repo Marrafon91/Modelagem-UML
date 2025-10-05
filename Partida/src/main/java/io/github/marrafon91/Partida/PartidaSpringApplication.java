@@ -1,7 +1,7 @@
 package io.github.marrafon91.Partida;
 
-import io.github.marrafon91.Partida.Repository.CampeonatoRepository;
-import io.github.marrafon91.Partida.Repository.PartidaRepository;
+import io.github.marrafon91.Partida.repository.CampeonatoRepository;
+import io.github.marrafon91.Partida.repository.PartidaRepository;
 import io.github.marrafon91.Partida.entities.Campeonato;
 import io.github.marrafon91.Partida.entities.Partida;
 import lombok.RequiredArgsConstructor;

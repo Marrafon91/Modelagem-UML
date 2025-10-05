@@ -1,6 +1,7 @@
 package io.github.marrafon91.Partida.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Partida {
     private Integer pontuacaoMandante;
     private Integer pontuacaoVisitante;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "campeonato_id")
     private  Campeonato campeonato;
