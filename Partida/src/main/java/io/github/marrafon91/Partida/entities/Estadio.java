@@ -22,4 +22,8 @@ public class Estadio {
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
 
+    @OneToOne
+    @JoinColumn(name = "endereco_id", nullable = false, unique = true)
+    private Endereco endereco;
+
 }

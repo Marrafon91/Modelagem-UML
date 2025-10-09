@@ -2,6 +2,7 @@ package io.github.marrafon91.Partida.controller;
 
 import io.github.marrafon91.Partida.entities.Partida;
 import io.github.marrafon91.Partida.repository.PartidaRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,20 +12,20 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "partidas")
+@RequestMapping(value = "/partidas")
 @RequiredArgsConstructor
 public class PartidaController {
 
     private final PartidaRepository partidaRepository;
 
     @PostMapping
-    public ResponseEntity<Void> criarPartida(@RequestBody Partida partida) {
-        Partida save = partidaRepository.save(partida);
+    public ResponseEntity<Void> criarPartida(@RequestBody @Valid Partida partida) {
+        Partida salva = partidaRepository.save(partida);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(save.getId())
+                .buildAndExpand(salva.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
     }
@@ -55,7 +56,7 @@ public class PartidaController {
     @PutMapping("{id}")
     public ResponseEntity<Partida> attPartidas(
             @PathVariable("id") Long id,
-            @RequestBody Partida partida) {
+            @RequestBody @Valid Partida partida) {
 
         return partidaRepository.findById(id)
                 .map(partidaEncontrada -> {
