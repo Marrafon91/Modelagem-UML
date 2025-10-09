@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -55,4 +57,10 @@ public class Partida {
     @JsonIgnore
     @JoinColumn(name = "estadio_id")
     private Estadio estadio;
+
+    @ManyToMany(mappedBy = "partidas")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<Jogador> jogadores = new ArrayList<>();
+
 }
