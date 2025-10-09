@@ -1,5 +1,6 @@
 package io.github.marrafon91.Partida;
 
+import io.github.marrafon91.Partida.entities.enums.Time;
 import io.github.marrafon91.Partida.repository.CampeonatoRepository;
 import io.github.marrafon91.Partida.repository.PartidaRepository;
 import io.github.marrafon91.Partida.entities.Campeonato;
@@ -30,12 +31,16 @@ public class PartidaSpringApplication implements CommandLineRunner {
 		campeonato.setNome("Copa de Handebol");
 
 		Partida partida1 = new Partida();
+		partida1.setMandante(Time.CORINTHIANS);
+		partida1.setVisitante(Time.PALMEIRAS);
 		partida1.setData(LocalDate.parse("2017-08-20"));
 		partida1.setPontuacaoMandante(10);
 		partida1.setPontuacaoVisitante(7);
 		partida1.setCampeonato(campeonato);
 
 		Partida partida2 = new Partida();
+		partida2.setMandante(Time.FLUMINENSE);
+		partida2.setVisitante(Time.FLAMENGO);
 		partida2.setData(LocalDate.parse("2017-08-21"));
 		partida2.setPontuacaoMandante(9);
 		partida2.setPontuacaoVisitante(13);

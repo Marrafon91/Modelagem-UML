@@ -1,7 +1,6 @@
 package io.github.marrafon91.Partida.controller;
 
 import io.github.marrafon91.Partida.entities.Partida;
-import io.github.marrafon91.Partida.repository.CampeonatoRepository;
 import io.github.marrafon91.Partida.repository.PartidaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +59,9 @@ public class PartidaController {
 
         return partidaRepository.findById(id)
                 .map(partidaEncontrada -> {
+                    partidaEncontrada.setMandante(partida.getMandante());
+                    partidaEncontrada.setVisitante(partida.getVisitante());
+                    partidaEncontrada.setData(partida.getData());
                     partidaEncontrada.setPontuacaoMandante(partida.getPontuacaoMandante());
                     partidaEncontrada.setPontuacaoVisitante(partida.getPontuacaoVisitante());
                     Partida atualizar = partidaRepository.save(partidaEncontrada);

@@ -1,4 +1,4 @@
-package io.github.marrafon91.Partida.entities;
+package io.github.marrafon91.Partida.entities.enums;
 
 public enum Time {
     CORINTHIANS(1),
@@ -21,7 +21,7 @@ public enum Time {
         return codigo;
     }
 
-    public static Time codigoTime(int codigo) {
+    public static Time codigoDoTime(int codigo) {
         for (Time time : Time.values()) {
             if (codigo == time.getCodigo()) {
                 return time;
