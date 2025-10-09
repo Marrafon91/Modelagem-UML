@@ -36,31 +36,6 @@ public class PartidaSpringApplication implements CommandLineRunner {
 		campeonato.setAno(2017);
 		campeonato.setNome("Copa de Handebol");
 
-		Partida partida1 = new Partida();
-		partida1.setMandante(Time.CORINTHIANS);
-		partida1.setVisitante(Time.PALMEIRAS);
-		partida1.setData(LocalDate.parse("2017-08-20"));
-		partida1.setPontuacaoMandante(10);
-		partida1.setPontuacaoVisitante(7);
-		partida1.setCampeonato(campeonato);
-
-		Partida partida2 = new Partida();
-		partida2.setMandante(Time.FLUMINENSE);
-		partida2.setVisitante(Time.FLAMENGO);
-		partida2.setData(LocalDate.parse("2017-08-21"));
-		partida2.setPontuacaoMandante(9);
-		partida2.setPontuacaoVisitante(13);
-		partida2.setCampeonato(campeonato);
-
-		campeonato.getPartidas().add(partida1);
-		campeonato.getPartidas().add(partida2);
-
-		campeonatoRepository.save(campeonato);
-
-		partidaRepository.save(partida1);
-		partidaRepository.save(partida2);
-
-
 		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Avenida Maracanã");
 		endereco.setNumero(1000);
@@ -85,11 +60,31 @@ public class PartidaSpringApplication implements CommandLineRunner {
 		estadio1.setNome("Estádio do Pacaembu");
 		estadio1.setEndereco(endereco1);
 
-		enderecoRepository.save(endereco);
-		enderecoRepository.save(endereco1);
-
 		estadioRepository.save(estadio);
 		estadioRepository.save(estadio1);
+
+		Partida partida1 = new Partida();
+		partida1.setMandante(Time.CORINTHIANS);
+		partida1.setVisitante(Time.PALMEIRAS);
+		partida1.setData(LocalDate.parse("2017-08-20"));
+		partida1.setPontuacaoMandante(10);
+		partida1.setPontuacaoVisitante(7);
+		partida1.setCampeonato(campeonato);
+		partida1.setEstadio(estadio);
+
+		Partida partida2 = new Partida();
+		partida2.setMandante(Time.FLUMINENSE);
+		partida2.setVisitante(Time.FLAMENGO);
+		partida2.setData(LocalDate.parse("2017-08-21"));
+		partida2.setPontuacaoMandante(9);
+		partida2.setPontuacaoVisitante(13);
+		partida2.setCampeonato(campeonato);
+		partida2.setEstadio(estadio1);
+
+		campeonato.getPartidas().add(partida1);
+		campeonato.getPartidas().add(partida2);
+
+		campeonatoRepository.save(campeonato);
 
 	}
 }

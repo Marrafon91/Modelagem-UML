@@ -22,7 +22,7 @@ public class Estadio {
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", nullable = false, unique = true)
     private Endereco endereco;
 

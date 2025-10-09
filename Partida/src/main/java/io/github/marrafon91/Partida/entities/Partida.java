@@ -50,4 +50,9 @@ public class Partida {
     @ManyToOne
     @JoinColumn(name = "campeonato_id")
     private  Campeonato campeonato;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "estadio_id")
+    private Estadio estadio;
 }
