@@ -17,7 +17,7 @@ import java.util.List;
 public class PartidaController {
 
     private final PartidaRepository partidaRepository;
-    
+
     @PostMapping
     public ResponseEntity<Void> criarPartida(@RequestBody Partida partida) {
         Partida save = partidaRepository.save(partida);
