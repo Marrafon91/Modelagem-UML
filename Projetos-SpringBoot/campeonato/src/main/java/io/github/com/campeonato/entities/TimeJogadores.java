@@ -1,6 +1,5 @@
 package io.github.com.campeonato.entities;
 
-import io.github.com.campeonato.entities.enums.Time;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
