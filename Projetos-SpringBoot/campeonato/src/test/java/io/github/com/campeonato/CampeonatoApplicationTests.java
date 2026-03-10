@@ -1,10 +1,10 @@
-package io.github.marrafon91.Partida;
+package io.github.com.campeonato;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PartidaSpringApplicationTests {
+class CampeonatoApplicationTests {
 
 	@Test
 	void contextLoads() {
