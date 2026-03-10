@@ -1,24 +1,36 @@
 package io.github.com.campeonato.entities;
 
+import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "tb_campeonato")
 public class Campeonato {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "ano", nullable = false, length = 80)
     private Integer ano;
+
+    @Column(name = "nome_do_campeonato",nullable = false, length = 100)
     private String nome;
 
+    @OneToMany(mappedBy = "campeonato", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Partida> partidas = new HashSet<>();
 
     public Campeonato() {
     }
 
-    public Campeonato(Long id, Integer ano, String nome) {
+    public Campeonato(Long id, Integer ano, String nome, Set<Partida> partidas) {
         this.id = id;
         this.ano = ano;
         this.nome = nome;
+        this.partidas = partidas;
     }
 
     public Long getId() {
@@ -47,6 +59,11 @@ public class Campeonato {
 
     public Set<Partida> getPartidas() {
         return partidas;
+    }
+
+    public void addPartida(Partida partida) {
+        partidas.add(partida);
+        partida.setCampeonato(this);
     }
 
     @Override

@@ -1,9 +1,15 @@
 package io.github.com.campeonato.entities;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_endereco")
 public class Endereco {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String logradouro;
     private Integer numero;
@@ -11,6 +17,8 @@ public class Endereco {
     private String bairro;
     private String cidade;
     private String estado;
+
+    @OneToOne(mappedBy = "endereco")
     private Estadio estadio;
 
     public Endereco() {

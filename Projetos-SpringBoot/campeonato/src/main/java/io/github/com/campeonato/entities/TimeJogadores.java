@@ -1,25 +1,32 @@
 package io.github.com.campeonato.entities;
 
 import io.github.com.campeonato.entities.enums.Time;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "tb_time_jogadores")
 public class TimeJogadores {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Time time;
+    private String nome;
 
+    @OneToMany(mappedBy = "time")
     private Set<Jogador> jogadores = new HashSet<>();
 
     public TimeJogadores() {
     }
 
-    public TimeJogadores(Long id, Time time) {
+    public TimeJogadores(Long id, String nome, Set<Jogador> jogadores) {
         this.id = id;
-        this.time = time;
+        this.nome = nome;
+        this.jogadores = jogadores;
     }
 
     public Long getId() {
@@ -30,12 +37,12 @@ public class TimeJogadores {
         this.id = id;
     }
 
-    public Time getTime() {
-        return time;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Set<Jogador> getJogadores() {

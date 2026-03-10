@@ -1,24 +1,53 @@
 package io.github.com.campeonato.entities;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+@Entity
+@Table(name = "tb_jogador")
 public class Jogador {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 100)
     private String nome;
+
+    @Column(length = 50)
     private String posicao;
+
+    @Column(name = "numero_camisa")
     private Integer numeroCamisa;
+
+    @Column(nullable = false)
     private LocalDate nascimento;
+
+    @Column(length = 1)
     private Character genero;
+
     private Double altura;
 
+    @ManyToOne
+    @JoinColumn(name = "time_id", nullable = false)
     private TimeJogadores time;
+
+    @ManyToMany
+    @JoinTable(
+            name = "jogador_partida",
+            joinColumns = @JoinColumn(name = "jogador_id"),
+            inverseJoinColumns = @JoinColumn(name = "partida_id")
+    )
+    private Set<Partida> partidas = new HashSet<>();
 
     public Jogador() {
     }
 
-    public Jogador(Long id, String nome, String posicao, Integer numeroCamisa, LocalDate nascimento, Character genero, Double altura, TimeJogadores time) {
+    public Jogador(Long id, String nome, String posicao, Integer numeroCamisa, LocalDate nascimento,
+                   Character genero, Double altura, TimeJogadores time) {
         this.id = id;
         this.nome = nome;
         this.posicao = posicao;
@@ -93,10 +122,14 @@ public class Jogador {
         this.time = time;
     }
 
+    public Set<Partida> getPartidas() {
+        return partidas;
+    }
+
     @Override
     public boolean equals(Object o) {
+        if (o == this) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Jogador jogador = (Jogador) o;
         return Objects.equals(id, jogador.id);
     }
@@ -105,4 +138,5 @@ public class Jogador {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }

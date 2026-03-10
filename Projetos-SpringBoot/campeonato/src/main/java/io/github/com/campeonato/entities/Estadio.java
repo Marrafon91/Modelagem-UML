@@ -1,12 +1,21 @@
 package io.github.com.campeonato.entities;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_estadio")
 public class Estadio {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", nullable = false, unique = true)
     private Endereco endereco;
 
     public Estadio() {
@@ -42,6 +51,7 @@ public class Estadio {
         this.endereco = endereco;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -54,4 +64,5 @@ public class Estadio {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }

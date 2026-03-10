@@ -1,36 +1,66 @@
 package io.github.com.campeonato.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.com.campeonato.entities.enums.Time;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "tb_partida")
 public class Partida {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    @JsonFormat( pattern = "yyyy-MM-dd")
     private LocalDate data;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 50, nullable = false)
     private Time mandante;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 50, nullable = false)
     private Time visitante;
 
+    @Column(name = "pontuacao_mandante")
     private Integer pontuacaoMandante;
+
+    @Column(name = "pontuacao_visitante")
     private Integer pontuacaoVisitante;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "campeonato_id")
+    private Campeonato campeonato;
+
+    @ManyToOne
+    @JoinColumn(name = "estadio_id", nullable = false)
     private Estadio estadio;
 
+    @ManyToMany(mappedBy = "partidas")
     private Set<Jogador> jogadores = new HashSet<>();
 
     public Partida() {
     }
 
-    public Partida(Long id, LocalDate data, Time mandante, Time visitante, Integer pontuacaoMandante, Integer pontuacaoVisitante, Estadio estadio) {
+    public Partida(Long id, LocalDate data, Time mandante, Time visitante, Integer pontuacaoMandante, Integer pontuacaoVisitante, Campeonato campeonato, Estadio estadio, Set<Jogador> jogadores) {
         this.id = id;
         this.data = data;
         this.mandante = mandante;
         this.visitante = visitante;
         this.pontuacaoMandante = pontuacaoMandante;
         this.pontuacaoVisitante = pontuacaoVisitante;
+        this.campeonato = campeonato;
         this.estadio = estadio;
+        this.jogadores = jogadores;
     }
 
     public Long getId() {
@@ -81,6 +111,14 @@ public class Partida {
         this.pontuacaoVisitante = pontuacaoVisitante;
     }
 
+    public Campeonato getCampeonato() {
+        return campeonato;
+    }
+
+    public void setCampeonato(Campeonato campeonato) {
+        this.campeonato = campeonato;
+    }
+
     public Estadio getEstadio() {
         return estadio;
     }
@@ -105,4 +143,5 @@ public class Partida {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }
