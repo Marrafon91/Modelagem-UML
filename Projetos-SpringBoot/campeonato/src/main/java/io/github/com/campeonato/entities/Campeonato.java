@@ -14,10 +14,10 @@ public class Campeonato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ano", nullable = false, length = 80)
+    @Column(name = "ano", nullable = false)
     private Integer ano;
 
-    @Column(name = "nome_do_campeonato",nullable = false, length = 100)
+    @Column(name = "nome_do_campeonato",nullable = false)
     private String nome;
 
     @OneToMany(mappedBy = "campeonato", cascade = CascadeType.ALL, orphanRemoval = true)
