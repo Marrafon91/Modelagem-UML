@@ -16,8 +16,26 @@ public class EnderecoService {
     private EnderecoRepository repository;
 
     @Transactional(readOnly = true)
-    public List<EnderecoDTO> findEnderecoBylogradouro(EnderecoDTO endereco) {
-        List<Endereco> list = repository.findByLogradouro(endereco.logradouro());
+    public List<EnderecoDTO> findAll() {
+        List<Endereco> list = repository.findAll();
+        return list.stream().map(EnderecoDTO::new).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<EnderecoDTO> findByLogradouro(String logradouro) {
+        List<Endereco> list = repository.findByLogradouro(logradouro);
+        return list.stream().map(EnderecoDTO::new).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<EnderecoDTO> findByCidade(String cidade) {
+        List<Endereco> list = repository.findByCidade(cidade);
+        return list.stream().map(EnderecoDTO::new).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<EnderecoDTO> findByBairro(String bairro) {
+        List<Endereco> list = repository.findByBairro(bairro);
         return list.stream().map(EnderecoDTO::new).toList();
     }
 }

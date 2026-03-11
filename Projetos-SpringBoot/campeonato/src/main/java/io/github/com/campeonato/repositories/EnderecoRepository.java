@@ -13,8 +13,8 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
     @Query("SELECT e FROM Endereco e WHERE LOWER(e.logradouro) LIKE LOWER(CONCAT('%', :logradouro, '%'))")
     List<Endereco> findByLogradouro(@Param("logradouro") String logradouro);
 
-    // Buscar endereço por cidade
-    @Query("SELECT e FROM Endereco e WHERE LOWER(e.cidade) = LOWER(:cidade)")
+    // Buscar endereço por cidade (unnacent nao funciona no H2 apenas no PostgreSQL)
+    @Query("SELECT e FROM Endereco e WHERE LOWER(e.cidade) LIKE LOWER(CONCAT('%', :cidade, '%'))")
     List<Endereco> findByCidade(@Param("cidade") String cidade);
 
     // Buscar endereço por bairro
