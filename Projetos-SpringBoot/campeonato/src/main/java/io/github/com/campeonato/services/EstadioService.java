@@ -2,7 +2,6 @@ package io.github.com.campeonato.services;
 
 import io.github.com.campeonato.dtos.EstadioDTO;
 import io.github.com.campeonato.entities.Estadio;
-import io.github.com.campeonato.exceptions.EstadioAlreadyExistsException;
 import io.github.com.campeonato.exceptions.EstadioNotFoundException;
 import io.github.com.campeonato.repositories.EstadioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
