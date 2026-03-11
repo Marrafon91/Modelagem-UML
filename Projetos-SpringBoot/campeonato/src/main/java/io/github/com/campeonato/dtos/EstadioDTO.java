@@ -2,6 +2,7 @@ package io.github.com.campeonato.dtos;
 
 import io.github.com.campeonato.entities.Estadio;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record EstadioDTO(
@@ -11,6 +12,7 @@ public record EstadioDTO(
         @Size(min = 3, max = 50)
         String nome,
 
+        @NotNull(message = "Endereco não pode ser nulo")
         EnderecoDTO endereco
 ) {
     public EstadioDTO(Estadio entity) {

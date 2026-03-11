@@ -1,7 +1,6 @@
 package io.github.com.campeonato.controllers;
 
 import io.github.com.campeonato.dtos.EnderecoDTO;
-import io.github.com.campeonato.entities.Endereco;
 import io.github.com.campeonato.services.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
