@@ -78,4 +78,12 @@ public class PartidaService {
         return new PartidaMinDTO(partida);
 
     }
+
+    @Transactional
+    public void deleteById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("Partida com ID " + id + " não encontrado");
+        }
+        repository.deleteById(id);
+    }
 }

@@ -48,4 +48,10 @@ public class PartidaController {
         PartidaMinDTO result = service.update(id, dto);
         return ResponseEntity.ok().body(result);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
