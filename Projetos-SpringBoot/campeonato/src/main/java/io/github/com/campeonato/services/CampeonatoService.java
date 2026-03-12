@@ -26,8 +26,8 @@ public class CampeonatoService {
 
     @Transactional(readOnly = true)
     public CampeonatoComPartidasPageDTO findByNameWithPartidas(String nome, Pageable pageable) {
-        // Se o pageable não especificar tamanho, usa 5 como padrão
-        Pageable pageablePartidas = pageable.getPageSize() == 0 ? PageRequest.of(0, 5) : PageRequest.of(pageable.getPageNumber(), 5);
+        // Se o pageable não especificar tamanho, usa 6 como padrão
+        Pageable pageablePartidas = pageable.getPageSize() == 0 ? PageRequest.of(0, 6) : PageRequest.of(pageable.getPageNumber(), 6);
         
         // Buscar o campeonato completo (sem paginação)
         Campeonato campeonato = repository.findByNomeContaining(nome, PageRequest.of(0, 1))
@@ -40,7 +40,7 @@ public class CampeonatoService {
             throw new RuntimeException("Campeonato com nome '" + nome + "' não encontrado");
         }
         
-        // Buscar partidas paginadas de 5 em 5
+        // Buscar partidas paginadas de 6 em 6
         Page<io.github.com.campeonato.entities.Partida> partidas = repository.findPartidasByCampeonatoNomeContaining(nome, pageablePartidas);
         
         // Converter partidas para DTO sem jogadores
