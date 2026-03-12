@@ -68,7 +68,7 @@ INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura,
 INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura, time_id) VALUES ('Ronaldo Silva', 'Pivô', 27, '1993-08-14', 'M', 1.96, 6);
 INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura, time_id) VALUES ('Sérgio Neves', 'Ala Direita', 28, '1994-10-23', 'M', 1.86, 6);
 INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura, time_id) VALUES ('Marcio Barros', 'Ala Esquerda', 29, '1996-04-08', 'M', 1.84, 6);
-INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura, time_id) VALUES ('Tiago Monteiro', 'Goleiro', 34, '1992-11-25', 'M', 1.90, 6);
+INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura, time_id) VALUES ('Tiago Monteiro', 'Goleiro', 34, '1992-11-25', 'M', 1.91, 6);
 INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura, time_id) VALUES ('Leandro Costa', 'Lateral Direito', 35, '1997-06-12', 'M', 1.77, 6);
 INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura, time_id) VALUES ('Fabio Nunes', 'Lateral Esquerdo', 36, '1995-02-19', 'M', 1.81, 6);
 
