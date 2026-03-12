@@ -8,7 +8,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 import java.time.LocalDate;
 
-public record PartidaDTOSemJogadores(
+public record PartidaInsertDTO(
         Long id,
 
         @FutureOrPresent(message = "Data deve ser uma data futura ou presente")
@@ -24,12 +24,12 @@ public record PartidaDTOSemJogadores(
         @NotNull(message = "Pontuação do visitante não pode ser nula")
         @PositiveOrZero(message = "Pontuação do visitante deve ser um valor positivo ou zero")
         Integer pontuacaoVisitante,
+        Long campeonatoId,
+        Long estadioId
 
-        CampeonatoDTOSimplified campeonato,
 
-        EstadioDTO estadio
 ) {
-    public PartidaDTOSemJogadores(Partida entity) {
+    public PartidaInsertDTO(Partida entity) {
         this(
                 entity.getId(),
                 entity.getData(),
@@ -37,9 +37,8 @@ public record PartidaDTOSemJogadores(
                 entity.getVisitante(),
                 entity.getPontuacaoMandante(),
                 entity.getPontuacaoVisitante(),
-                entity.getCampeonato() != null ? new CampeonatoDTOSimplified(entity.getCampeonato()) : null,
-                entity.getEstadio() != null ? new EstadioDTO(entity.getEstadio()) : null
+                entity.getCampeonato().getId(),
+                entity.getEstadio().getId()
         );
     }
 }
-

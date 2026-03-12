@@ -2,7 +2,7 @@ package io.github.com.campeonato.services;
 
 import io.github.com.campeonato.dtos.CampeonatoComPartidasPageDTO;
 import io.github.com.campeonato.dtos.CampeonatoDTO;
-import io.github.com.campeonato.dtos.PartidaDTOSemJogadores;
+import io.github.com.campeonato.dtos.PartidaMinDTO;
 import io.github.com.campeonato.entities.Campeonato;
 import io.github.com.campeonato.repositories.CampeonatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class CampeonatoService {
         Page<io.github.com.campeonato.entities.Partida> partidas = repository.findPartidasByCampeonatoNomeContaining(nome, pageablePartidas);
         
         // Converter partidas para DTO sem jogadores
-        Page<PartidaDTOSemJogadores> partidasDTO = partidas.map(PartidaDTOSemJogadores::new);
+        Page<PartidaMinDTO> partidasDTO = partidas.map(PartidaMinDTO::new);
         
         return new CampeonatoComPartidasPageDTO(campeonato, partidasDTO);
     }

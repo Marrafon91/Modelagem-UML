@@ -14,9 +14,9 @@ public record CampeonatoComPartidasPageDTO(
         @NotBlank(message = "Nome não pode ser vazio")
         @Size(min = 3, max = 50, message = "Nome deve ter entre 3 e 50 caracteres")
         String nome,
-        Page<PartidaDTOSemJogadores> partidas
+        Page<PartidaMinDTO> partidas
 ) {
-    public CampeonatoComPartidasPageDTO(Campeonato entity, Page<PartidaDTOSemJogadores> partidas) {
+    public CampeonatoComPartidasPageDTO(Campeonato entity, Page<PartidaMinDTO> partidas) {
         this(
                 entity.getId(),
                 entity.getAno(),

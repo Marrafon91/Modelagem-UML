@@ -7,10 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
 import java.time.LocalDate;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-public record PartidaDTO(
+public record PartidaMinDTO(
         Long id,
 
         @FutureOrPresent(message = "Data deve ser uma data futura ou presente")
@@ -27,13 +25,10 @@ public record PartidaDTO(
         @PositiveOrZero(message = "Pontuação do visitante deve ser um valor positivo ou zero")
         Integer pontuacaoVisitante,
 
-        CampeonatoMinDTO campeonato,
+        CampeonatoMinDTO campeonato
 
-        EstadioDTO estadio,
-
-        Set<JogadorDTO> jogadores
 ) {
-    public PartidaDTO(Partida entity) {
+    public PartidaMinDTO(Partida entity) {
         this(
                 entity.getId(),
                 entity.getData(),
@@ -41,12 +36,8 @@ public record PartidaDTO(
                 entity.getVisitante(),
                 entity.getPontuacaoMandante(),
                 entity.getPontuacaoVisitante(),
-                entity.getCampeonato() != null ? new CampeonatoMinDTO(entity.getCampeonato()) : null,
-                entity.getEstadio() != null ? new EstadioDTO(entity.getEstadio()) : null,
-                entity.getJogadores()
-                        .stream()
-                        .map(JogadorDTO::new)
-                        .collect(Collectors.toSet())
+                entity.getCampeonato() != null ? new CampeonatoMinDTO(entity.getCampeonato()) : null
         );
     }
 }
+

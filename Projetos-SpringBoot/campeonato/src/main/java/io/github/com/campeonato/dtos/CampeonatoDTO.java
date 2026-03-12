@@ -31,17 +31,4 @@ public record CampeonatoDTO(
     }
 }
 
-// DTO simplificado para evitar ciclo infinito de referências
-record CampeonatoDTOSimplified(
-        Long id,
-        Integer ano,
-        String nome
-) {
-    public CampeonatoDTOSimplified(Campeonato entity) {
-        this(
-                entity.getId(),
-                entity.getAno(),
-                entity.getNome()
-        );
-    }
-}
+

@@ -36,7 +36,6 @@ public class Partida {
     @Column(name = "pontuacao_visitante")
     private Integer pontuacaoVisitante;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "campeonato_id")
     private Campeonato campeonato;
