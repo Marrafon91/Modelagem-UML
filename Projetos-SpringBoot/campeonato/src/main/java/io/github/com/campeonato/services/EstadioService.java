@@ -18,13 +18,15 @@ public class EstadioService {
 
     @Transactional(readOnly = true)
     public List<EstadioDTO> findAll() {
-        List<Estadio> list = repository.findAll();
-        return list.stream().map(EstadioDTO::new).toList();
+        // Usa FETCH JOIN para carregar endereco e evitar N+1 queries
+        List<Estadio> estadios = repository.findAllWithEndereco();
+        return estadios.stream().map(EstadioDTO::new).toList();
     }
 
     @Transactional(readOnly = true)
     public EstadioDTO findById(Long id) {
-        return repository.findById(id)
+        // Usa FETCH JOIN para carregar endereco e evitar N+1 queries
+        return repository.findByIdWithEndereco(id)
                 .map(EstadioDTO::new)
                 .orElseThrow(() -> new EstadioNotFoundException("Estádio com ID " + id + " não encontrado"));
     }
