@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 
+
     // Buscar endereço por logradouro
     @Query("SELECT e FROM Endereco e WHERE LOWER(e.logradouro) LIKE LOWER(CONCAT('%', :logradouro, '%'))")
     List<Endereco> findByLogradouro(@Param("logradouro") String logradouro);
