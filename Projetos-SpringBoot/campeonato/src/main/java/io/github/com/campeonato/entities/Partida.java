@@ -131,7 +131,11 @@ public class Partida {
         return jogadores;
     }
 
-    @Override
+    public void addJogador(Jogador jogador) {
+        jogadores.add(jogador);
+        jogador.getPartidas().add(this);
+    }
+
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
 

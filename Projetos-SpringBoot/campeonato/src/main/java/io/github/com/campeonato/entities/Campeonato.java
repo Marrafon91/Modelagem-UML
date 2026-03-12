@@ -17,7 +17,7 @@ public class Campeonato {
     @Column(name = "ano", nullable = false)
     private Integer ano;
 
-    @Column(name = "nome_do_campeonato",nullable = false)
+    @Column(name = "nome_do_campeonato", nullable = false, length = 100)
     private String nome;
 
     @OneToMany(mappedBy = "campeonato", cascade = CascadeType.ALL, orphanRemoval = true)

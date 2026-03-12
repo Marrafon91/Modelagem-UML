@@ -14,6 +14,7 @@ public class TimeJogadores {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 100)
     private String nome;
 
     @OneToMany(mappedBy = "time")
@@ -48,7 +49,11 @@ public class TimeJogadores {
         return jogadores;
     }
 
-    @Override
+    public void addJogador(Jogador jogador) {
+        jogadores.add(jogador);
+        jogador.setTime(this);
+    }
+
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
 

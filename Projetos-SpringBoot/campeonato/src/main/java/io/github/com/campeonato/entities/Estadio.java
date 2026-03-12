@@ -2,7 +2,9 @@ package io.github.com.campeonato.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_estadio")
@@ -12,11 +14,15 @@ public class Estadio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 100)
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", nullable = false, unique = true)
     private Endereco endereco;
+
+    @OneToMany(mappedBy = "estadio")
+    private Set<Partida> partidas = new HashSet<>();
 
     public Estadio() {
     }
@@ -51,8 +57,14 @@ public class Estadio {
         this.endereco = endereco;
     }
 
+    public Set<Partida> getPartidas() {
+        return partidas;
+    }
 
-    @Override
+    public void addPartida(Partida partida) {
+        partidas.add(partida);
+        partida.setEstadio(this);
+    }
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
 

@@ -13,8 +13,8 @@ public record CampeonatoDTO(
         @NotNull(message = "Ano não pode ser nulo")
         Integer ano,
 
-        @NotBlank(message = "Campo nome deve ter entre 3 e 50 caracteres")
-        @Size(min = 3, max = 50)
+        @NotBlank(message = "Nome não pode ser vazio")
+        @Size(min = 3, max = 50, message = "Nome deve ter entre 3 e 50 caracteres")
         String nome,
         Set<PartidaDTO> partidas
 ) {

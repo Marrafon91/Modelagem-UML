@@ -7,7 +7,7 @@ INSERT INTO tb_estadio(nome, endereco_id) VALUES ('Maracanã', 1);
 INSERT INTO tb_estadio(nome, endereco_id) VALUES ('Estádio do Pacaembu', 2);
 
 -- Campeonato
-INSERT INTO tb_campeonato(ano, nome_do_campeonato) VALUES (2017, 'Copa de Handebol');
+INSERT INTO tb_campeonato(ano, nome_do_campeonato) VALUES (2017, 'Copa de Futebol');
 
 --Times
 INSERT INTO tb_time_jogadores(nome) VALUES ('CORINTHIANS');

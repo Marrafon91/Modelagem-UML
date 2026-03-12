@@ -4,6 +4,7 @@ import io.github.com.campeonato.entities.Partida;
 import io.github.com.campeonato.entities.enums.Time;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -12,16 +13,18 @@ import java.util.stream.Collectors;
 public record PartidaDTO(
         Long id,
 
-        @FutureOrPresent(message = "Data deve ser uma data futura")
+        @FutureOrPresent(message = "Data deve ser uma data futura ou presente")
         LocalDate data,
 
-        @NotNull(message = "Não pode ser Nulo")
+        @NotNull(message = "Mandante não pode ser nulo")
         Time mandante,
-        @NotNull(message = "Não pode ser Nulo")
+        @NotNull(message = "Visitante não pode ser nulo")
         Time visitante,
-        @NotNull(message = "Não pode ser Nulo")
+        @NotNull(message = "Pontuação do mandante não pode ser nula")
+        @PositiveOrZero(message = "Pontuação do mandante deve ser um valor positivo ou zero")
         Integer pontuacaoMandante,
-        @NotNull(message = "Não pode ser Nulo")
+        @NotNull(message = "Pontuação do visitante não pode ser nula")
+        @PositiveOrZero(message = "Pontuação do visitante deve ser um valor positivo ou zero")
         Integer pontuacaoVisitante,
 
         CampeonatoDTO campeonato,
