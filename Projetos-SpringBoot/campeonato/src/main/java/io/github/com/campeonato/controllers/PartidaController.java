@@ -42,4 +42,10 @@ public class PartidaController {
         PartidaInsertDTO result = service.insert(dto);
         return ResponseEntity.created(location).body(result);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PartidaMinDTO> update(@PathVariable Long id, @Valid @RequestBody PartidaMinDTO dto) {
+        PartidaMinDTO result = service.update(id, dto);
+        return ResponseEntity.ok().body(result);
+    }
 }

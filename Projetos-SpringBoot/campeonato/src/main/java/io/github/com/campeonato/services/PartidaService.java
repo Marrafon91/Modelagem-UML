@@ -62,4 +62,20 @@ public class PartidaService {
 
         return new PartidaInsertDTO(partida);
     }
+
+    @Transactional
+    public PartidaMinDTO update(Long id, PartidaMinDTO dto) {
+        Partida partida = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Partida com ID " + id + " não encontrado"));
+
+        partida.setData(dto.data());
+        partida.setMandante(dto.mandante());
+        partida.setVisitante(dto.visitante());
+        partida.setPontuacaoMandante(dto.pontuacaoMandante());
+        partida.setPontuacaoVisitante(dto.pontuacaoVisitante());
+
+        partida = repository.save(partida);
+        return new PartidaMinDTO(partida);
+
+    }
 }
