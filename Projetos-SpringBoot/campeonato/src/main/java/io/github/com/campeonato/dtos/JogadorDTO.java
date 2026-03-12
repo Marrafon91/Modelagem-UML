@@ -17,7 +17,8 @@ public record JogadorDTO(
         String posicao,
 
         @NotNull(message = "Número da camisa não pode ser nulo")
-        @Positive(message = "Número da camisa deve ser positivo")
+        @Min(value = 1, message = "Número da camisa deve ser no mínimo 1")
+        @Max(value = 99, message = "Número da camisa deve ser no máximo 99")
         Integer numeroCamisa,
 
         @NotNull(message = "Data de nascimento não pode ser nula")
