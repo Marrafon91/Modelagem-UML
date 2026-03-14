@@ -1,0 +1,799 @@
+{
+  "info": {
+    "_postman_id": "f18c8f08-2508-429c-841e-d7b8880f7283",
+    "name": "Campeonato Handebol",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45214078"
+  },
+  "item": [
+    {
+      "name": "Endereco",
+      "item": [
+        {
+          "name": "Procurar Todos",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/endereco",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "endereco"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Procurar por Rua",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/endereco/logradouro/:logradouro",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "endereco",
+                "logradouro",
+                ":logradouro"
+              ],
+              "variable": [
+                {
+                  "key": "logradouro",
+                  "value": "raca"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Procurar por Cidade",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/endereco/cidade/:cidade",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "endereco",
+                "cidade",
+                ":cidade"
+              ],
+              "variable": [
+                {
+                  "key": "cidade",
+                  "value": "São"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Procurar por Bairro",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/endereco/bairro/:bairro",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "endereco",
+                "bairro",
+                ":bairro"
+              ],
+              "variable": [
+                {
+                  "key": "bairro",
+                  "value": "bela"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Partidas",
+      "item": [
+        {
+          "name": "Criar Partida",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"data\": \"2026-10-10\",\r\n  \"mandante\": \"CORINTHIANS\",\r\n  \"visitante\": \"PALMEIRAS\",\r\n  \"pontuacaoMandante\": 28,\r\n  \"pontuacaoVisitante\": 25,\r\n  \"campeonatoId\": 1,\r\n  \"estadioId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/partidas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "partidas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Partidas",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"data\": \"2026-10-10\",\r\n  \"mandante\": \"CORINTHIANS\",\r\n  \"visitante\": \"PALMEIRAS\",\r\n  \"pontuacaoMandante\": 28,\r\n  \"pontuacaoVisitante\": 25\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/partidas/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "partidas",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Partidas",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/partidas",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "partidas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Partidas Por Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/partidas/:id",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "partidas",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar Partidas Por Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/partidas/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "partidas",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "13"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Estadio",
+      "item": [
+        {
+          "name": "Procurar todos",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/estadio",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "estadio"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Procurar por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/estadio/:id",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "estadio",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Procurar por Nome",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/estadio/nome/:nome",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "estadio",
+                "nome",
+                ":nome"
+              ],
+              "variable": [
+                {
+                  "key": "nome",
+                  "value": "pa"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nome\": \"Estádio do Pacaembu12344 dadasda\",\r\n    \"endereco\": {\r\n        \"id\": 2,\r\n        \"logradouro\": \"Avenida Machado de Assis\",\r\n        \"numero\": 1920,\r\n        \"complemento\": \"Esquina com Rua São Francisco Xavier\",\r\n        \"bairro\": \"Santo André\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"estado\": \"SP\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/estadio/:id",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "estadio",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Save",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"Estádio Novo\",\r\n  \"endereco\": {\r\n    \"logradouro\": \"Rua Principal\",\r\n    \"numero\": 123,\r\n    \"complemento\": \"Campo de futebol 1\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"estado\": \"SP\"\r\n  }\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/estadio",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "estadio"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nome\": \"Estádio do Iberapuera\",\r\n    \"endereco\": {\r\n        \"id\": 2,\r\n        \"logradouro\": \"Avenida Machado de Assis\",\r\n        \"numero\": 1910,\r\n        \"complemento\": \"Esquina com Rua São Francisco Xavier\",\r\n        \"bairro\": \"Santo André\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"estado\": \"SP\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/estadio/:id",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "estadio",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Campeonato",
+      "item": [
+        {
+          "name": "Campeonato By Partida",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/campeonato/nome/:nome",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "campeonato",
+                "nome",
+                ":nome"
+              ],
+              "variable": [
+                {
+                  "key": "nome",
+                  "value": "campeonato"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Campeonato",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/campeonato",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "campeonato"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Jogadores",
+      "item": [
+        {
+          "name": "Todos Jogadores",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/jogadores?size=10&page=0&sort=nome,desc",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "jogadores"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "sort",
+                  "value": "nome,desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Jogador por ID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/jogadores/:id",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "jogadores",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Jogador por ID Copy",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/jogadores/nome/:nome",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "jogadores",
+                "nome",
+                ":nome"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "nome",
+                  "value": "Lima"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Times",
+      "item": [
+        {
+          "name": "Procurar todos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/times",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "times"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Procurar time por nome",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/times/nome/:time",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "times",
+                "nome",
+                ":time"
+              ],
+              "variable": [
+                {
+                  "key": "time",
+                  "value": "co"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Procurar time por nome Copy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/times/:id",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "times",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "9"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
