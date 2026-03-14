@@ -50,8 +50,8 @@ CREATE TABLE tb_jogador (
 CREATE TABLE tb_partida (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     data DATE NOT NULL,
-    mandante VARCHAR(50) NOT NULL,
-    visitante VARCHAR(50) NOT NULL,
+    mandante INTEGER NOT NULL,
+    visitante INTEGER NOT NULL,
     pontuacao_mandante INT,
     pontuacao_visitante INT,
     campeonato_id BIGINT,

@@ -96,13 +96,23 @@ INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura,
 INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura, time_id) VALUES ('Ulisses Costa', 'Lateral Direito', 54, '1997-07-30', 'M', 1.81, 9);
 INSERT INTO tb_jogador(nome, posicao, numero_camisa, nascimento, genero, altura, time_id) VALUES ('Vinicius Santos', 'Lateral Esquerdo', 55, '1995-01-25', 'M', 1.84, 9);
 
--- Partidas do Campeonato (6 partidas)
-INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id) VALUES ('2024-03-01', 'CORINTHIANS', 'PALMEIRAS', 28, 25, 1, 1);
-INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id) VALUES ('2024-03-02', 'SANTOS', 'SAO_PAULO', 31, 29, 1, 2);
-INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id) VALUES ('2024-03-03', 'FLAMENGO', 'VASCO', 35, 32, 1, 3);
-INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id) VALUES ('2024-03-04', 'BOTAFOGO', 'FLUMINENSE', 26, 28, 1, 4);
-INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id) VALUES ('2024-03-05', 'GREMIO', 'CORINTHIANS', 30, 27, 1, 1);
-INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id) VALUES ('2024-03-06', 'PALMEIRAS', 'SANTOS', 33, 31, 1, 2);
+INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id)
+VALUES ('2024-03-01', 1, 2, 28, 25, 1, 1);
+
+INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id)
+VALUES ('2024-03-02', 3, 4, 31, 29, 1, 2);
+
+INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id)
+VALUES ('2024-03-03', 5, 6, 35, 32, 1, 3);
+
+INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id)
+VALUES ('2024-03-04', 7, 8, 26, 28, 1, 4);
+
+INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id)
+VALUES ('2024-03-05', 9, 1, 30, 27, 1, 1);
+
+INSERT INTO tb_partida(data, mandante, visitante, pontuacao_mandante, pontuacao_visitante, campeonato_id, estadio_id)
+VALUES ('2024-03-06', 2, 3, 33, 31, 1, 2);
 
 -- Relação jogador x partida (6 jogadores por partida)
 -- Partida 1: Corinthians vs Palmeiras

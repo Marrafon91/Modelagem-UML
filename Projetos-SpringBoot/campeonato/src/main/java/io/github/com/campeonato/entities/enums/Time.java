@@ -21,12 +21,12 @@ public enum Time {
         return codigo;
     }
 
-    public static Time codigoDoTime(int codigo) {
-        for (Time time : Time.values()) {
-            if (codigo == time.getCodigo()) {
-                return time;
+    public static Time fromCodigo(int codigo) {
+        for (Time t : Time.values()) {
+            if (t.codigo == codigo) {
+                return t;
             }
         }
-        throw new IllegalArgumentException("Time inválido: " + codigo);
+        throw new IllegalArgumentException("Código inválido: " + codigo);
     }
 }

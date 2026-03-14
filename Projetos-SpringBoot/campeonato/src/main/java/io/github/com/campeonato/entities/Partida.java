@@ -22,11 +22,9 @@ public class Partida {
     @JsonFormat( pattern = "yyyy-MM-dd")
     private LocalDate data;
 
-    @Enumerated(EnumType.STRING)
     @Column(length = 50, nullable = false)
     private Time mandante;
 
-    @Enumerated(EnumType.STRING)
     @Column(length = 50, nullable = false)
     private Time visitante;
 

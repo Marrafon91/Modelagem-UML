@@ -9,26 +9,35 @@ import jakarta.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 
 public record PartidaInsertDTO(
+
         Long id,
 
+        @NotNull(message = "Data da partida é obrigatória")
         @FutureOrPresent(message = "Data deve ser uma data futura ou presente")
         LocalDate data,
 
         @NotNull(message = "Mandante não pode ser nulo")
         Time mandante,
+
         @NotNull(message = "Visitante não pode ser nulo")
         Time visitante,
+
         @NotNull(message = "Pontuação do mandante não pode ser nula")
         @PositiveOrZero(message = "Pontuação do mandante deve ser um valor positivo ou zero")
         Integer pontuacaoMandante,
+
         @NotNull(message = "Pontuação do visitante não pode ser nula")
         @PositiveOrZero(message = "Pontuação do visitante deve ser um valor positivo ou zero")
         Integer pontuacaoVisitante,
+
+        @NotNull(message = "Campeonato é obrigatório")
         Long campeonatoId,
+
+        @NotNull(message = "Estádio é obrigatório")
         Long estadioId
 
-
 ) {
+
     public PartidaInsertDTO(Partida entity) {
         this(
                 entity.getId(),

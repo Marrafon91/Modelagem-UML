@@ -5,11 +5,14 @@ import io.github.com.campeonato.dtos.PartidaMinDTO;
 import io.github.com.campeonato.entities.Campeonato;
 import io.github.com.campeonato.entities.Estadio;
 import io.github.com.campeonato.entities.Partida;
+import io.github.com.campeonato.exceptions.DatabaseException;
 import io.github.com.campeonato.exceptions.ResourceNotFoundException;
 import io.github.com.campeonato.repositories.CampeonatoRepository;
 import io.github.com.campeonato.repositories.EstadioRepository;
 import io.github.com.campeonato.repositories.PartidaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,8 +45,53 @@ public class PartidaService {
 
     @Transactional
     public PartidaInsertDTO insert(PartidaInsertDTO dto) {
+        try {
+            if (dto.mandante() == dto.visitante()) {
+                throw new DatabaseException("Mandante e visitante não podem ser o mesmo time");
+            }
 
-        Partida partida = new Partida();
+            Partida partida = new Partida();
+
+            copyDtoToEntity(dto, partida);
+
+            partida = repository.save(partida);
+
+            return new PartidaInsertDTO(partida);
+
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Campeonato ou Estádio não encontrado");
+        }
+    }
+
+    @Transactional
+    public PartidaMinDTO update(Long id, PartidaMinDTO dto) {
+
+        Partida partida = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Partida com ID " + id + " não encontrado"));
+
+        partida.setData(dto.data());
+        partida.setMandante(dto.mandante());
+        partida.setVisitante(dto.visitante());
+        partida.setPontuacaoMandante(dto.pontuacaoMandante());
+        partida.setPontuacaoVisitante(dto.pontuacaoVisitante());
+
+        return new PartidaMinDTO(partida);
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("Partida com ID " + id + " não encontrado");
+        }
+        try {
+        repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Violação de integridade referencial!");
+        }
+    }
+
+    private void copyDtoToEntity(PartidaInsertDTO dto, Partida partida) {
 
         partida.setData(dto.data());
         partida.setMandante(dto.mandante());
@@ -56,33 +104,5 @@ public class PartidaService {
 
         Estadio estadio = estadioRepository.getReferenceById(dto.estadioId());
         partida.setEstadio(estadio);
-
-        partida = repository.save(partida);
-
-        return new PartidaInsertDTO(partida);
-    }
-
-    @Transactional
-    public PartidaMinDTO update(Long id, PartidaMinDTO dto) {
-        Partida partida = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Partida com ID " + id + " não encontrado"));
-
-        partida.setData(dto.data());
-        partida.setMandante(dto.mandante());
-        partida.setVisitante(dto.visitante());
-        partida.setPontuacaoMandante(dto.pontuacaoMandante());
-        partida.setPontuacaoVisitante(dto.pontuacaoVisitante());
-
-        partida = repository.save(partida);
-        return new PartidaMinDTO(partida);
-
-    }
-
-    @Transactional
-    public void deleteById(Long id) {
-        if (!repository.existsById(id)) {
-            throw new ResourceNotFoundException("Partida com ID " + id + " não encontrado");
-        }
-        repository.deleteById(id);
     }
 }

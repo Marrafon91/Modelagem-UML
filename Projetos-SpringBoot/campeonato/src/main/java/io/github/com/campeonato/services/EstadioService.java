@@ -22,14 +22,12 @@ public class EstadioService {
 
     @Transactional(readOnly = true)
     public List<EstadioDTO> findAll() {
-        // Usa FETCH JOIN para carregar endereco e evitar N+1 queries
         List<Estadio> estadios = repository.findAllWithEndereco();
         return estadios.stream().map(EstadioDTO::new).toList();
     }
 
     @Transactional(readOnly = true)
     public EstadioDTO findById(Long id) {
-        // Usa FETCH JOIN para carregar endereco e evitar N+1 queries
         return repository.findByIdWithEndereco(id)
                 .map(EstadioDTO::new)
                 .orElseThrow(() -> new ResourceNotFoundException("Estádio com ID " + id + " não encontrado"));
@@ -45,7 +43,7 @@ public class EstadioService {
     }
 
     @Transactional
-    public EstadioDTO save(EstadioDTO dto) {
+    public EstadioDTO insert(EstadioDTO dto) {
 
         Estadio estadio = toEntity(dto);
 
@@ -78,7 +76,7 @@ public class EstadioService {
         try {
             repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Violação de integridade referencial!", e);
+            throw new DatabaseException("Violação de integridade referencial!");
         }
     }
 

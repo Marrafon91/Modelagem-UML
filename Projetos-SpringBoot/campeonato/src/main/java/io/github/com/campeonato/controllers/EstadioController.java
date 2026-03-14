@@ -41,7 +41,7 @@ public class EstadioController {
     public ResponseEntity<EstadioDTO> insert(
             @Valid @RequestBody EstadioDTO dto) {
 
-        EstadioDTO newDto = service.save(dto);
+        EstadioDTO newDto = service.insert(dto);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
