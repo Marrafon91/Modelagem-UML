@@ -45,8 +45,7 @@ public class EstadioService {
     public EstadioDTO save(EstadioDTO dto) {
         Estadio estadio = new Estadio();
         estadio.setNome(dto.nome());
-        
-        // Criar endereço a partir do EnderecoDTO
+
         Endereco endereco = new Endereco();
         endereco.setLogradouro(dto.endereco().logradouro());
         endereco.setNumero(dto.endereco().numero());
