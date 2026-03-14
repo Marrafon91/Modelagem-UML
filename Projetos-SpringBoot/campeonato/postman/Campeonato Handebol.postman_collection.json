@@ -74,7 +74,7 @@
               "variable": [
                 {
                   "key": "logradouro",
-                  "value": "raca"
+                  "value": "ch"
                 }
               ]
             }
@@ -679,7 +679,7 @@
           "response": []
         },
         {
-          "name": "Jogador por ID Copy",
+          "name": "Jogador por Nome",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -715,7 +715,7 @@
               "variable": [
                 {
                   "key": "nome",
-                  "value": "Lima"
+                  "value": "Silva"
                 }
               ]
             }
@@ -770,7 +770,7 @@
           "response": []
         },
         {
-          "name": "Procurar time por nome Copy",
+          "name": "Procurar time por ID",
           "request": {
             "method": "GET",
             "header": [],
@@ -786,7 +786,7 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": "9"
+                  "value": "2"
                 }
               ]
             }
