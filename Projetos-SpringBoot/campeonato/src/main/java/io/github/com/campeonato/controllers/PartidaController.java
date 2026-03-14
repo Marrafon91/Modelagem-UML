@@ -1,6 +1,5 @@
 package io.github.com.campeonato.controllers;
 
-import io.github.com.campeonato.dtos.PartidaDTO;
 import io.github.com.campeonato.dtos.PartidaInsertDTO;
 import io.github.com.campeonato.dtos.PartidaMinDTO;
 import io.github.com.campeonato.services.PartidaService;
