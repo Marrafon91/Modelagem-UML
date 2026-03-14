@@ -40,15 +40,24 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<CustomError> jsonParseError(HttpMessageNotReadableException e, HttpServletRequest request) {
-        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+    public ResponseEntity<CustomError> handleHttpMessageNotReadable(
+            HttpMessageNotReadableException e,
+            HttpServletRequest request) {
+
+        String error = "JSON malformado ou valor inválido enviado";
+
+        if (e.getMessage().contains("Time")) {
+            error = "Valor inválido para o campo 'mandante' ou 'visitante'";
+        }
 
         CustomError err = new CustomError(
-                Instant.now(),status.value(),
-                "Malformed JSON request. Check request body structure.",
+                Instant.now(),
+                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                error,
                 request.getRequestURI()
         );
-        return ResponseEntity.status(status).body(err);
+
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
     }
 }
 

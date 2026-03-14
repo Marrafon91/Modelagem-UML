@@ -33,12 +33,13 @@ public class PartidaController {
 
     @PostMapping
     public ResponseEntity<PartidaInsertDTO> insert(@Valid @RequestBody PartidaInsertDTO dto) {
+        PartidaInsertDTO result = service.insert(dto);
+
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(dto.id())
                 .toUri();
-        PartidaInsertDTO result = service.insert(dto);
         return ResponseEntity.created(location).body(result);
     }
 
