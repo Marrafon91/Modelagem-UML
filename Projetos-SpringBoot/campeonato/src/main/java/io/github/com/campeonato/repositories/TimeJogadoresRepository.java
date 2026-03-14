@@ -15,8 +15,8 @@ public interface TimeJogadoresRepository extends JpaRepository<TimeJogadores, Lo
     List<TimeJogadores> findAllWithJogadores();
 
     // Buscar time por nome com jogadores carregados (evita N+1)
-    @Query("SELECT t FROM TimeJogadores t LEFT JOIN FETCH t.jogadores WHERE LOWER(t.nome) = LOWER(:nome)")
-    Optional<TimeJogadores> findByNome(@Param("nome") String nome);
+    @Query("SELECT t FROM TimeJogadores t LEFT JOIN FETCH t.jogadores WHERE LOWER(t.nome) LIKE LOWER(CONCAT('%', :nome, '%'))")
+    List<TimeJogadores> findByNome(@Param("nome") String nome);
 
     // Buscar time por ID com jogadores carregados (evita N+1)
     @Query("SELECT t FROM TimeJogadores t LEFT JOIN FETCH t.jogadores WHERE t.id = :id")

@@ -4,7 +4,6 @@ import io.github.com.campeonato.dtos.JogadorDTO;
 import io.github.com.campeonato.entities.Jogador;
 import io.github.com.campeonato.exceptions.ResourceNotFoundException;
 import io.github.com.campeonato.repositories.JogadorRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
