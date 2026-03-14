@@ -3,9 +3,12 @@ package io.github.com.campeonato.services;
 import io.github.com.campeonato.dtos.EstadioDTO;
 import io.github.com.campeonato.entities.Endereco;
 import io.github.com.campeonato.entities.Estadio;
+import io.github.com.campeonato.exceptions.DatabaseException;
 import io.github.com.campeonato.exceptions.ResourceNotFoundException;
 import io.github.com.campeonato.repositories.EstadioRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +46,44 @@ public class EstadioService {
 
     @Transactional
     public EstadioDTO save(EstadioDTO dto) {
+
+        Estadio estadio = toEntity(dto);
+
+        estadio = repository.save(estadio);
+
+        return new EstadioDTO(estadio);
+    }
+
+    @Transactional
+    public EstadioDTO update(Long id, EstadioDTO dto) {
+
+        try {
+
+            Estadio estadio = repository.getReferenceById(id);
+
+            updateData(estadio, dto);
+
+            return new EstadioDTO(estadio);
+
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Estádio com ID " + id + " não encontrado");
+        }
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("Estádio com ID " + id + " não encontrado");
+        }
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Violação de integridade referencial!", e);
+        }
+    }
+
+    private Estadio toEntity(EstadioDTO dto) {
+
         Estadio estadio = new Estadio();
         estadio.setNome(dto.nome());
 
@@ -53,25 +94,26 @@ public class EstadioService {
         endereco.setBairro(dto.endereco().bairro());
         endereco.setCidade(dto.endereco().cidade());
         endereco.setEstado(dto.endereco().estado());
-        
+
         estadio.setEndereco(endereco);
-        Estadio savedEstadio = repository.save(estadio);
-        return new EstadioDTO(savedEstadio);
+
+        return estadio;
     }
 
-    @Transactional
-    public EstadioDTO update(Long id, EstadioDTO dto) {
-        Estadio estadio = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Estádio com ID " + id + " não encontrado"));
+
+    private void updateData(Estadio estadio, EstadioDTO dto) {
+
         estadio.setNome(dto.nome());
-        
-        // Atualizar endereço se fornecido
+
         if (dto.endereco() != null) {
+
             Endereco endereco = estadio.getEndereco();
+
             if (endereco == null) {
                 endereco = new Endereco();
                 estadio.setEndereco(endereco);
             }
+
             endereco.setLogradouro(dto.endereco().logradouro());
             endereco.setNumero(dto.endereco().numero());
             endereco.setComplemento(dto.endereco().complemento());
@@ -79,17 +121,6 @@ public class EstadioService {
             endereco.setCidade(dto.endereco().cidade());
             endereco.setEstado(dto.endereco().estado());
         }
-        
-        Estadio updatedEstadio = repository.save(estadio);
-        return new EstadioDTO(updatedEstadio);
-    }
-
-    @Transactional
-    public void delete(Long id) {
-        if (!repository.existsById(id)) {
-            throw new ResourceNotFoundException("Estádio com ID " + id + " não encontrado");
-        }
-        repository.deleteById(id);
     }
 }
 

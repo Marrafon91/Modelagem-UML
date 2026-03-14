@@ -1,6 +1,7 @@
 package io.github.com.campeonato.dtos;
 
 import io.github.com.campeonato.entities.Estadio;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -12,6 +13,7 @@ public record EstadioDTO(
         @Size(min = 3, max = 50, message = "Nome deve ter entre 3 e 50 caracteres")
         String nome,
 
+        @Valid
         @NotNull(message = "Endereço não pode ser nulo")
         EnderecoDTO endereco
 ) {

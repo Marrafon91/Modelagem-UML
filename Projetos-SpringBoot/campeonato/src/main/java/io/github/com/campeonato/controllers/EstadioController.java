@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -36,9 +38,18 @@ public class EstadioController {
     }
 
     @PostMapping
-    public ResponseEntity<EstadioDTO> save(@Valid @RequestBody EstadioDTO dto) {
-        EstadioDTO savedEstadio = service.save(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedEstadio);
+    public ResponseEntity<EstadioDTO> insert(
+            @Valid @RequestBody EstadioDTO dto) {
+
+        EstadioDTO newDto = service.save(dto);
+
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(newDto.id())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(newDto);
     }
 
     @PutMapping("/{id}")
