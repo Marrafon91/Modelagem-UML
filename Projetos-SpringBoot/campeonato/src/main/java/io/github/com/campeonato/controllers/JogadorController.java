@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/jogadores")
 public class JogadorController {
@@ -28,5 +30,11 @@ public class JogadorController {
     public ResponseEntity<JogadorDTO> findById(@PathVariable Long id) {
         JogadorDTO dto = service.findJogadorById(id);
         return ResponseEntity.ok().body(dto);
+    }
+
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<JogadorDTO>> findByNome(@PathVariable String nome) {
+        List<JogadorDTO> result = service.findJogadorByNome(nome);
+        return ResponseEntity.ok().body(result);
     }
 }

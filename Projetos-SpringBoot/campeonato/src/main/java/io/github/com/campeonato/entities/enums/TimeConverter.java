@@ -1,6 +1,5 @@
-package io.github.com.campeonato.entities;
+package io.github.com.campeonato.entities.enums;
 
-import io.github.com.campeonato.entities.enums.Time;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
