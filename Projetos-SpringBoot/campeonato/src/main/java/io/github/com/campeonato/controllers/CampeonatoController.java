@@ -1,9 +1,11 @@
 package io.github.com.campeonato.controllers;
 
-import io.github.com.campeonato.dtos.CampeonatoComPartidasPageDTO;
 import io.github.com.campeonato.dtos.CampeonatoDTO;
+import io.github.com.campeonato.dtos.PartidaDTO;
 import io.github.com.campeonato.services.CampeonatoService;
+import io.github.com.campeonato.services.PartidaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +20,20 @@ public class CampeonatoController {
     @Autowired
     private CampeonatoService service;
 
+    @Autowired
+    private PartidaService partidaService;
+
     @GetMapping
     public CampeonatoDTO findAll() {
         return service.findALL();
     }
- 
-    @GetMapping("/nome/{nome}")
-    public ResponseEntity<CampeonatoComPartidasPageDTO> findByNameWithPartidas(@PathVariable String nome, Pageable pageable) {
-        CampeonatoComPartidasPageDTO campeonato = service.findByNameWithPartidas(nome, pageable);
-        return ResponseEntity.ok().body(campeonato);
+
+    @GetMapping("/{id}/partidas")
+    public ResponseEntity<Page<PartidaDTO>> findPartidasByCampeonato(
+            @PathVariable Long id,
+            Pageable pageable) {
+
+        Page<PartidaDTO> page = partidaService.findPartidasByCampeonato(id, pageable);
+        return ResponseEntity.ok(page);
     }
 }

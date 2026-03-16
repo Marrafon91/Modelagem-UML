@@ -2,6 +2,8 @@ package io.github.com.campeonato.repositories;
 
 import io.github.com.campeonato.entities.Partida;
 import io.github.com.campeonato.entities.enums.Time;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -30,4 +32,12 @@ public interface PartidaRepository extends JpaRepository<Partida, Long> {
     // Buscar partida por ID com estadio e campeonato carregados (evita N+1)
     @Query("SELECT p FROM Partida p JOIN FETCH p.estadio LEFT JOIN FETCH p.campeonato WHERE p.id = :id")
     Optional<Partida> findByIdWithEstadio(@Param("id") Long id);
+
+    @Query("""
+           SELECT p
+           FROM Partida p
+           JOIN p.campeonato c
+           WHERE c.id = :campeonatoId
+           """)
+    Page<Partida> findByCampeonatoId(Long campeonatoId, Pageable pageable);
 }

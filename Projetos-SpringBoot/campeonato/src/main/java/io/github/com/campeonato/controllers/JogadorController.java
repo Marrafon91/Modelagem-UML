@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,8 +29,10 @@ public class JogadorController {
         return ResponseEntity.ok().body(dto);
     }
 
-    @GetMapping("/nome/{nome}")
-    public ResponseEntity<List<JogadorDTO>> findByNome(@PathVariable String nome) {
+    @GetMapping("/nomeJogador")
+    public ResponseEntity<List<JogadorDTO>> findByNome(
+            @RequestParam(required = false) String nome) {
+
         List<JogadorDTO> result = service.findJogadorByNome(nome);
         return ResponseEntity.ok().body(result);
     }

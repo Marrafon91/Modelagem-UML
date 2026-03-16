@@ -4,10 +4,7 @@ import io.github.com.campeonato.dtos.EnderecoDTO;
 import io.github.com.campeonato.services.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,20 +22,26 @@ public class EnderecoController {
 
     }
 
-    @GetMapping("/logradouro/{logradouro}")
-    public ResponseEntity<List<EnderecoDTO>> findByLogradouro(@PathVariable String logradouro) {
+    @GetMapping("/logradouro")
+    public ResponseEntity<List<EnderecoDTO>> findByLogradouro(
+            @RequestParam(required = false) String logradouro) {
+
         List<EnderecoDTO> list = service.findByLogradouro(logradouro);
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("/cidade/{cidade}")
-    public ResponseEntity<List<EnderecoDTO>> findByCidade(@PathVariable String cidade) {
+    @GetMapping("/cidade")
+    public ResponseEntity<List<EnderecoDTO>> findByCidade(
+            @RequestParam(required = false) String cidade) {
+
         List<EnderecoDTO> list = service.findByCidade(cidade);
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("/bairro/{bairro}")
-    public ResponseEntity<List<EnderecoDTO>> findByBairro(@PathVariable String bairro) {
+    @GetMapping("/bairro")
+    public ResponseEntity<List<EnderecoDTO>> findByBairro(
+            @RequestParam(required = false) String bairro) {
+
         List<EnderecoDTO> list = service.findByBairro(bairro);
         return ResponseEntity.ok().body(list);
     }

@@ -31,8 +31,10 @@ public class EstadioController {
         return ResponseEntity.ok().body(estadio);
     }
 
-    @GetMapping("/nome/{nome}")
-    public ResponseEntity<EstadioDTO> findByNome(@PathVariable String nome) {
+    @GetMapping("/nome")
+    public ResponseEntity<EstadioDTO> findByNome(
+            @RequestParam(required = false) String nome) {
+
         EstadioDTO estadio = service.findByNome(nome);
         return ResponseEntity.ok().body(estadio);
     }

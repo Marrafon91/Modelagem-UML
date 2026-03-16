@@ -4,10 +4,7 @@ import io.github.com.campeonato.dtos.TimeJogadoresDTO;
 import io.github.com.campeonato.services.TimeJogadoresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,8 +27,10 @@ public class TimeJogadoresController {
         return ResponseEntity.ok().body(dto);
     }
 
-    @GetMapping("/nome/{time}")
-    public ResponseEntity<List<TimeJogadoresDTO>> findByNome(@PathVariable("time") String nome) {
+    @GetMapping("/nomeTime")
+    public ResponseEntity<List<TimeJogadoresDTO>> findByNome(
+            @RequestParam(required = false) String nome) {
+
         List<TimeJogadoresDTO> list = service.findByNome(nome);
         return ResponseEntity.ok().body(list);
     }
