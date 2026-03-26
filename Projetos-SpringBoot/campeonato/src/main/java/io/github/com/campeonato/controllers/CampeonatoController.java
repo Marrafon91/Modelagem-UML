@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/campeonato")
 public class CampeonatoController {
@@ -24,8 +26,8 @@ public class CampeonatoController {
     private PartidaService partidaService;
 
     @GetMapping
-    public CampeonatoDTO findAll() {
-        return service.findALL();
+    public Page<CampeonatoDTO> findAll(Pageable pageable) {
+        return service.findALLPaged(pageable);
     }
 
     @GetMapping("/{id}/partidas")

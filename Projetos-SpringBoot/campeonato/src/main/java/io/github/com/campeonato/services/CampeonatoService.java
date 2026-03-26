@@ -2,7 +2,6 @@ package io.github.com.campeonato.services;
 
 import io.github.com.campeonato.dtos.CampeonatoComPartidasPageDTO;
 import io.github.com.campeonato.dtos.CampeonatoDTO;
-import io.github.com.campeonato.dtos.PartidaDTO;
 import io.github.com.campeonato.dtos.PartidaMinDTO;
 import io.github.com.campeonato.entities.Campeonato;
 import io.github.com.campeonato.repositories.CampeonatoRepository;
@@ -20,9 +19,9 @@ public class CampeonatoService {
     private CampeonatoRepository repository;
 
     @Transactional(readOnly = true)
-    public CampeonatoDTO findALL() {
-        Campeonato campeonatos = repository.findAll().getFirst();
-        return new CampeonatoDTO(campeonatos);
+    public Page<CampeonatoDTO> findALLPaged(Pageable pageable) {
+        Page<Campeonato> result = repository.findAllWithPartidas(pageable);
+        return result.map(CampeonatoDTO::new);
     }
 
     @Transactional(readOnly = true)
