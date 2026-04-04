@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/campeonato")
+@RequestMapping("/campeonatos")
 @Tag(name = "Campeonatos", description = "Controle do Campeonato")
 public class CampeonatoController {
 
