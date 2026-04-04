@@ -4,6 +4,7 @@ import io.github.com.campeonato.dtos.CampeonatoDTO;
 import io.github.com.campeonato.dtos.PartidaDTO;
 import io.github.com.campeonato.services.CampeonatoService;
 import io.github.com.campeonato.services.PartidaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/campeonato")
+@Tag(name = "Campeonatos", description = "Controle do Campeonato")
 public class CampeonatoController {
 
     @Autowired
