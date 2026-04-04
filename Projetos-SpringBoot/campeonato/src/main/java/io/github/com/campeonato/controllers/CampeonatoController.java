@@ -1,16 +1,12 @@
 package io.github.com.campeonato.controllers;
 
 import io.github.com.campeonato.dtos.CampeonatoDTO;
-import io.github.com.campeonato.dtos.PartidaDTO;
 import io.github.com.campeonato.services.CampeonatoService;
-import io.github.com.campeonato.services.PartidaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,20 +20,13 @@ public class CampeonatoController {
     @Autowired
     private CampeonatoService service;
 
-    @Autowired
-    private PartidaService partidaService;
-
-    @GetMapping
-    public Page<CampeonatoDTO> findAll(Pageable pageable) {
-        return service.findALLPaged(pageable);
+    @Operation(description = "Todo Campeonato", summary = "Lista de todo campeonato", responses = {
+            @ApiResponse(description = "OK", responseCode = "200")
+    })
+    @GetMapping(produces = "application/json")
+    public List<CampeonatoDTO> findAll() {
+        return service.findAllCampeonatos();
     }
 
-    @GetMapping("/{id}/partidas")
-    public ResponseEntity<Page<PartidaDTO>> findPartidasByCampeonato(
-            @PathVariable Long id,
-            Pageable pageable) {
 
-        Page<PartidaDTO> page = partidaService.findPartidasByCampeonato(id, pageable);
-        return ResponseEntity.ok(page);
-    }
 }

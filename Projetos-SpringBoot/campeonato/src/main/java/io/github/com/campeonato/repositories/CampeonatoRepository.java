@@ -14,7 +14,7 @@ public interface CampeonatoRepository extends JpaRepository<Campeonato, Long> {
 
     // Buscar todos os campeonatos com partidas carregadas (evita N+1)
     @Query("SELECT DISTINCT c FROM Campeonato c LEFT JOIN FETCH c.partidas p LEFT JOIN FETCH p.estadio e LEFT JOIN FETCH e.endereco LEFT JOIN FETCH p.jogadores")
-    Page<Campeonato> findAllWithPartidas(Pageable pageable);
+    List<Campeonato> findAllWithPartidas();
 
     // Buscar campeonato por nome com partidas carregadas (evita N+1)
     @Query("SELECT DISTINCT c FROM Campeonato c LEFT JOIN FETCH c.partidas p LEFT JOIN FETCH p.estadio e LEFT JOIN FETCH e.endereco LEFT JOIN FETCH p.jogadores WHERE LOWER(c.nome) LIKE LOWER(CONCAT('%', :nome, '%'))")

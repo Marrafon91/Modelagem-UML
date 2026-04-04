@@ -19,7 +19,7 @@ public class OpenAPIConfig {
                         .description("Campeonato API description")
                         .version("v0.0.1")
                         .license(new License()
-                                .name("Apache 2.0")
+                                .name("meu github")
                                 .url("https://github.com/Marrafon91/Modelagem-UML/tree/main/Projetos-SpringBoot/campeonato")));
     }
 }
