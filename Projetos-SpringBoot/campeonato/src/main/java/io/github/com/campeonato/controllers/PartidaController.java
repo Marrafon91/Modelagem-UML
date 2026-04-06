@@ -42,7 +42,13 @@ public class PartidaController {
         return ResponseEntity.ok().body(result);
     }
 
-    @PostMapping
+    @Operation(description = "Inserir partida", summary = "Nova partida", responses = {
+            @ApiResponse(description = "Created", responseCode = "201"),
+            @ApiResponse(description = "Bad Request", responseCode = "400"),
+            @ApiResponse(description = "Conflict", responseCode = "409"),
+            @ApiResponse(description = "Unprocessable Entity", responseCode = "422")
+    })
+    @PostMapping(produces = "application/json")
     public ResponseEntity<PartidaInsertDTO> insert(@Valid @RequestBody PartidaInsertDTO dto) {
         PartidaInsertDTO result = service.insert(dto);
 
@@ -54,13 +60,23 @@ public class PartidaController {
         return ResponseEntity.created(location).body(result);
     }
 
-    @PutMapping("/{id}")
+    @Operation(description = "Atualizar partida", summary = "Partida atualizar por ID", responses = {
+            @ApiResponse(description = "Ok", responseCode = "200"),
+            @ApiResponse(description = "Bad Request", responseCode = "400"),
+            @ApiResponse(description = "Not Found", responseCode = "404"),
+            @ApiResponse(description = "Unprocessable Entity", responseCode = "422")
+    })
+    @PutMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<PartidaMinDTO> update(@PathVariable Long id, @Valid @RequestBody PartidaMinDTO dto) {
         PartidaMinDTO result = service.update(id, dto);
         return ResponseEntity.ok().body(result);
     }
 
-    @DeleteMapping("/{id}")
+    @Operation(description = "Deletar partida", summary = "Deletar Partida por ID", responses = {
+            @ApiResponse(description = "No Content", responseCode = "204"),
+            @ApiResponse(description = "Not Found", responseCode = "404")            
+    })
+    @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
