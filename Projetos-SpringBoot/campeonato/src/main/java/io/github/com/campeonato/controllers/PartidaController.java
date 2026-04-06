@@ -74,7 +74,7 @@ public class PartidaController {
 
     @Operation(description = "Deletar partida", summary = "Deletar Partida por ID", responses = {
             @ApiResponse(description = "No Content", responseCode = "204"),
-            @ApiResponse(description = "Not Found", responseCode = "404")            
+            @ApiResponse(description = "Not Found", responseCode = "404")
     })
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
