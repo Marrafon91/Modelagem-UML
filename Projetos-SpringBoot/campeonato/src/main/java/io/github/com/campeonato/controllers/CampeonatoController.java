@@ -28,5 +28,4 @@ public class CampeonatoController {
         return service.findAllCampeonatos();
     }
 
-
 }
